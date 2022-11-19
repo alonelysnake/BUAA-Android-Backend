@@ -1,6 +1,6 @@
 package com.backend.entity;
 
-public class OrderDish {
+public class DishIndent {
     private int orderId;
     private int dishId;
     

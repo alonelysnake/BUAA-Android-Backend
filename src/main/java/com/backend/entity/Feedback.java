@@ -1,6 +1,6 @@
 package com.backend.entity;
 
-public class FeedbackMessage {
+public class Feedback {
     private int id;
     private int adminId;
     private int userId;

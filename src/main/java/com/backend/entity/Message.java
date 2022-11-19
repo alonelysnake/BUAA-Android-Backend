@@ -1,13 +1,18 @@
 package com.backend.entity;
 
+import java.time.LocalDateTime;
+
 public class Message {
     private int id;
     private int send;
     private int recv;
-    private String name;
-    private String password;
+    private LocalDateTime time;
     private String content;
-    
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
     public int getId() {
         return id;
     }
@@ -19,15 +24,7 @@ public class Message {
     public int getRecv() {
         return recv;
     }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-    
+
     public String getContent() {
         return content;
     }

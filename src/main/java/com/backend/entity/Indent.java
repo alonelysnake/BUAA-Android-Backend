@@ -2,7 +2,7 @@ package com.backend.entity;
 
 import java.time.LocalDateTime;
 
-public class Order {
+public class Indent {
     public enum OrderState {
         NOT_PAY,
         ACCEPTED,
