@@ -1,12 +1,12 @@
 package com.backend.entity;
 
 public class Provider {
-    private int id;
-    private String name;
-    private String password;
-    private int scores;
-    private int scorers;
-    private int d_id;
+    private int p_id;
+    private String p_name;
+    private String p_pw;
+    private int scores;//总分
+    private int scorers;//评分人数
+    private int d_id;//区域
     //TODO 详细信息
 
     public int getScores() {
@@ -22,14 +22,14 @@ public class Provider {
     }
 
     public int getId() {
-        return id;
+        return p_id;
     }
     
     public String getName() {
-        return name;
+        return p_name;
     }
     
     public String getPassword() {
-        return password;
+        return p_pw;
     }
 }

@@ -11,21 +11,21 @@ public class Indent {
         CANCELED
     }
     
-    private int id;
-    private LocalDateTime time;
+    private int o_id;
+    private LocalDateTime o_time;
     private double cost;
     private OrderState state;
     private String address;
-    private int user;
+    private int u_id;
     private int rider;
-    private int provider;
+    private int p_id;
     
     public int getId() {
-        return id;
+        return o_id;
     }
     
     public LocalDateTime getTime() {
-        return time;
+        return o_time;
     }
     
     public double getCost() {
@@ -41,7 +41,7 @@ public class Indent {
     }
     
     public int getUser() {
-        return user;
+        return u_id;
     }
     
     public int getRider() {
@@ -49,6 +49,6 @@ public class Indent {
     }
     
     public int getProvider() {
-        return provider;
+        return p_id;
     }
 }

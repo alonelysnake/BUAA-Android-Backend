@@ -1,24 +1,24 @@
 package com.backend.entity;
 
 public class Feedback {
-    private int id;
-    private int adminId;
-    private int userId;
-    private String content;
+    private int fb_id;
+    private int a_id;
+    private int u_id;
+    private String fb_content;
     
     public int getId() {
-        return id;
+        return fb_id;
     }
     
     public int getAdminId() {
-        return adminId;
+        return a_id;
     }
     
     public int getUserId() {
-        return userId;
+        return u_id;
     }
     
     public String getContent() {
-        return content;
+        return fb_content;
     }
 }

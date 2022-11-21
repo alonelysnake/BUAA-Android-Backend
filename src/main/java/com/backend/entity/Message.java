@@ -3,29 +3,29 @@ package com.backend.entity;
 import java.time.LocalDateTime;
 
 public class Message {
-    private int id;
-    private int send;
-    private int recv;
-    private LocalDateTime time;
-    private String content;
+    private int m_id;
+    private int s_id;
+    private int r_id;
+    private LocalDateTime m_time;
+    private String m_content;
 
     public LocalDateTime getTime() {
-        return time;
+        return m_time;
     }
 
     public int getId() {
-        return id;
+        return m_id;
     }
     
     public int getSend() {
-        return send;
+        return s_id;
     }
     
     public int getRecv() {
-        return recv;
+        return r_id;
     }
 
     public String getContent() {
-        return content;
+        return m_content;
     }
 }
