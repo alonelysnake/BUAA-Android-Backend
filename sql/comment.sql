@@ -11,5 +11,5 @@ create table comment(
     d_id int not null ,
     primary key (c_id),
     foreign key (u_id) references user(u_id),
-    foreign key (d_id) references dish(d_id),
+    foreign key (d_id) references dish(d_id)
 )default charset=utf8;

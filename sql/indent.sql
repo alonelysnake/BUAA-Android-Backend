@@ -12,7 +12,7 @@ create table indent(
     rider int,
     p_id int not null ,
     primary key (o_id),
-    foreign key (u_id) references user(id),
-    foreign key (rider) references user(id),
+    foreign key (u_id) references user(u_id),
+    foreign key (rider) references user(u_id),
     foreign key (p_id) references provider(p_id)
 )default charset=utf8;
