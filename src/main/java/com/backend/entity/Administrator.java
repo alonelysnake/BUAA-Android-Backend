@@ -1,19 +1,19 @@
 package com.backend.entity;
 
 public class Administrator {
-    private int id;
-    private String name;
-    private String password;
+    private int a_id;
+    private String a_name;
+    private String a_pw;
     
     public int getId() {
-        return id;
+        return a_id;
     }
     
     public String getName() {
-        return name;
+        return a_name;
     }
     
     public String getPassword() {
-        return password;
+        return a_pw;
     }
 }

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+
 @SpringBootTest
 class DemoApplicationTests {
     
@@ -14,8 +16,13 @@ class DemoApplicationTests {
 
     @Test
     void testGet() {
-        Activity activity = activityMapper.getActivityById(1);
-        System.out.println(activity.getId());
+        Activity activity = activityMapper.getActivityById(4);
+        System.out.println(activity);
     }
-    
+
+    @Test
+    void testInsert() {
+        // activityMapper.insertActivity(LocalDateTime.now(),LocalDateTime.now(),1);
+    }
+
 }
