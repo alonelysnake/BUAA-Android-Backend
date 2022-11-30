@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     //新增用户
-    @Insert("insert into user(u_name, u_pw) value(#{u_name},#{u_pw})")
+    @Insert("insert into user(u_name, u_pw) values(#{u_name},#{u_pw})")
     @Options(useGeneratedKeys = true,keyProperty = "u_id",keyColumn = "u_id")
     int insert(User user);
     

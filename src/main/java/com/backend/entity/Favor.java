@@ -1,14 +1,14 @@
 package com.backend.entity;
 
 public class Favor {
-    private int userId;
-    private int dishId;
+    private int u_id;
+    private int d_id;
     
     public int getUserId() {
-        return userId;
+        return u_id;
     }
     
     public int getDishId() {
-        return dishId;
+        return d_id;
     }
 }

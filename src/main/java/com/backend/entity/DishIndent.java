@@ -1,14 +1,14 @@
 package com.backend.entity;
 
 public class DishIndent {
-    private int orderId;
-    private int dishId;
+    private int o_id;
+    private int d_id;
     
     public int getOrderId() {
-        return orderId;
+        return o_id;
     }
     
     public int getDishId() {
-        return dishId;
+        return d_id;
     }
 }

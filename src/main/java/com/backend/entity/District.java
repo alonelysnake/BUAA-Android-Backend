@@ -1,14 +1,14 @@
 package com.backend.entity;
 
 public class District {
-    private int id;
-    private String name;
+    private int d_id;
+    private String d_name;
 
     public int getId() {
-        return id;
+        return d_id;
     }
 
     public String getName() {
-        return name;
+        return d_name;
     }
 }
