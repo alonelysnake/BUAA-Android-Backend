@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CommentMapper {
     // 发表评论
-    @Insert("insert into comment value(#{c_content},#{u_time},#{recommend},#{u_id},#{d_id})")
+    @Insert("insert into comment values(#{c_content},#{u_time},#{recommend},#{u_id},#{d_id})")
     @Options(useGeneratedKeys = true,keyProperty = "c_id",keyColumn = "c_id")
     int insert(Comment comment);
 
@@ -25,6 +25,9 @@ public interface CommentMapper {
     // 根据菜品查找评论
     @Select("select * from comment where d_id=#{d_id}")
     List<Comment> getCommentsByDid(@Param("d_id")int d_id);
+
+    @Select("select count(*) from comment where d_id=#{d_id}")
+    Integer countCommentByDid(@Param("d_id")int d_id);
 
     @Select("select * from comment")
     List<Comment> listAll();

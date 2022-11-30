@@ -37,4 +37,26 @@ public class Response<T> {
     public T getData() {
         return data;
     }
+
+    public void setInfo(int success,String trueMsg,String falseMsg) {
+        if (success == 0) {
+            setState(false);
+            setMsg(falseMsg);
+        } else {
+            setState(true);
+            setMsg(trueMsg);
+        }
+    }
+
+    public void setInfo(int success,String trueMsg,String falseMsg,T data) {
+        if (success == 0) {
+            setState(false);
+            setMsg(falseMsg);
+        } else {
+            setState(true);
+            setMsg(trueMsg);
+            setData(data);
+        }
+    }
+
 }

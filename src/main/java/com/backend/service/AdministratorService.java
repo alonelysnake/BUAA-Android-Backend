@@ -15,13 +15,7 @@ public class AdministratorService {
         Response<Administrator> res = new Response<>();
         try {
             int success = adminMapper.insertAdmin(admin);
-            if (success == 0) {
-                res.setState(false);
-                res.setMsg("用户已注册");
-            } else {
-                res.setState(true);
-                res.setData(admin);
-            }
+            res.setInfo(success,"注册成功","用户已注册",admin);
         } catch (Exception e) {
             res.setState(false);
             res.setMsg(e.getMessage());
@@ -35,13 +29,7 @@ public class AdministratorService {
         Response<Administrator> res = new Response<>();
         try {
             int success = adminMapper.countByNameAndPwd(name, password);
-            if (success == 0) {
-                res.setState(false);
-                res.setMsg("用户名不存在或密码错误");
-            } else {
-                res.setState(true);
-                res.setData(adminMapper.getAdminByName(name));
-            }
+            res.setInfo(success,"登录成功","用户名不存在或密码错误",adminMapper.getAdminByName(name));
         } catch (Exception e) {
             res.setState(false);
             res.setMsg(e.getMessage());
@@ -56,13 +44,7 @@ public class AdministratorService {
         final String initPassword = "123456";//TODO 初始密码设置?
         try {
             int success = adminMapper.updatePasswordForReset(id, initPassword);
-            if (success == 0) {
-                res.setState(false);
-                res.setMsg("重置密码失败");
-            } else {
-                res.setState(true);
-                res.setData("重置密码成功，初始密码为123456");
-            }
+            res.setInfo(success,"重置密码成功，初始密码为123456","重置密码失败");
         } catch (Exception e) {
             res.setState(false);
             res.setMsg(e.getMessage());

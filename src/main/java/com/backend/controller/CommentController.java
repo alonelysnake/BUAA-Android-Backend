@@ -13,10 +13,13 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = "/pages/{curPage}/{pageSize}",method = RequestMethod.GET)
+    /**
+     * 传入 当前页,页大小,菜品id
+     * */
+    @RequestMapping(value = "/pages/{curPage}/{pageSize}/{d_id}",method = RequestMethod.GET)
     @ResponseBody
-    public PageBean<Comment> commentPage(@PathVariable int curPage,@PathVariable int pageSize){
-        return commentService.findCommentByPage(curPage,pageSize);
+    public PageBean<Comment> findCommentByDish(@PathVariable int curPage,@PathVariable int pageSize,@PathVariable int d_id){
+        return commentService.findCommentByDish(curPage,pageSize,d_id);
     }
 
     @PostMapping("/insert")

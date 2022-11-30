@@ -5,7 +5,7 @@ drop table if exists dish;
 create table dish(
     d_id int not null auto_increment,
     p_id int not null ,
-    dicount double(3,2) ,
+    discount double(3,2) ,
     price double(3,2) not null ,
     sale int8 not null ,
     d_likes int not null ,

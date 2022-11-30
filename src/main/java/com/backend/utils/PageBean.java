@@ -87,5 +87,21 @@ public class PageBean<T> {
     public void setItems(List<T> items) {
         this.items = items;
     }
+
+    public void setInfo(List<T> items,int currentPage,int pageSize,int totalNum) {
+        setItems(items);//分页结果
+        setCurrentPage(currentPage);//当前页
+        setPageSize(pageSize);//设置每页显示条数
+        setTotalNum(totalNum);//设置总条数
+
+        //计算分页数
+        int pageCount=(totalNum+pageSize-1)/pageSize;
+        setTotalPage(pageCount);//设置总页数
+        if(currentPage<pageCount){
+            setIsMore(1);
+        }else {
+            setIsMore(0);
+        }
+    }
 }
 

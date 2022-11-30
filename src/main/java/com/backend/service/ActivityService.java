@@ -20,13 +20,7 @@ public class ActivityService {
         Response<Activity> res = new Response<>();
         try {
             int success = mapper.insertActivity(activity);
-            if (success == 0) {
-                res.setState(false);
-                res.setMsg("添加活动失败");
-            } else {
-                res.setState(true);
-                res.setData(activity);
-            }
+            res.setInfo(success,"添加活动成功","添加活动失败",activity);
         } catch (Exception e) {
             res.setState(false);
             res.setMsg(e.getMessage());

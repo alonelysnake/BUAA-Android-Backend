@@ -1,41 +1,41 @@
 package com.backend.entity;
 
 public class Dish {
-    private int id;
-    private int provider;
+    private int d_id;
+    private int p_id;
     private double discount;
-    private double originPrice;
-    private int saleNum;
-    private int likes;
-    private int dislikes;
+    private double price;
+    private int sale;
+    private int d_likes;
+    private int d_dislikes;
     //TODO 详细信息
 
 
     public int getLikes() {
-        return likes;
+        return d_likes;
     }
 
     public int getDislikes() {
-        return dislikes;
+        return d_dislikes;
     }
 
     public int getId() {
-        return id;
+        return d_id;
     }
     
     public int getProvider() {
-        return provider;
+        return p_id;
     }
     
     public double getDiscount() {
         return discount;
     }
     
-    public double getOriginPrice() {
-        return originPrice;
+    public double getPrice() {
+        return price;
     }
     
     public int getSaleNum() {
-        return saleNum;
+        return sale;
     }
 }
