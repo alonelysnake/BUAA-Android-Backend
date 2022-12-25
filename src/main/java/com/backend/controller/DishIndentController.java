@@ -20,7 +20,7 @@ public class DishIndentController {
     public Response<DishIndent> insertDish(@RequestBody DishIndent dishIndent) {
         return service.insertDish(dishIndent);
     }
-
+// 19.15/dishIndent/select/param1/param2
     @RequestMapping(value = "/select/{o_id}",method = RequestMethod.GET)
     @ResponseBody
     public List<DishIndent> findDishByOrder(@PathVariable int o_id) {

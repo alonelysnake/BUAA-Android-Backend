@@ -28,4 +28,9 @@ public class AdministratorController {
         return adminServive.resetPassword(id);
     }
 
+    @RequestMapping(path = "/getInfo/{id}")
+    public Response<Administrator> getAdminById(@PathVariable int id) {
+        return adminServive.getAdminById(id);
+    }
+
 }

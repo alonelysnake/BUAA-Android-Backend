@@ -53,4 +53,18 @@ public class AdministratorService {
         return res;
     }
 
+    public Response<Administrator> getAdminById(int id) {
+        Response<Administrator> res = new Response<>();
+        try {
+            Administrator admin = adminMapper.getAdminById(id);
+            res.setData(admin);
+            res.setState(true);
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
+    }
+
 }

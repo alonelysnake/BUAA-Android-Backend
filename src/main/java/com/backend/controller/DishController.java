@@ -28,7 +28,7 @@ public class DishController {
     }
 
     /**
-     * 传入 当前页,页大小,菜品id
+     * 传入 当前页,页大小,商家id
      * */
     @RequestMapping(value = "/pages/{curPage}/{pageSize}/{p_id}",method = RequestMethod.GET)
     @ResponseBody
@@ -36,11 +36,11 @@ public class DishController {
         return dishService.findDishByProvider(curPage,pageSize,p_id);
     }
 
-    // 修改菜品折扣
-    @PutMapping("/update/discount/{id}/{discount}")
+    // 修改菜品
+    @PutMapping("/update")
     @ResponseBody
-    public Response<Dish> updateDiscount(@PathVariable int id,@PathVariable double discount) {
-        return dishService.updateDiscount(id,discount);
+    public Response<Dish> updateDiscount(@RequestBody Dish dish) {
+        return dishService.updateDish(dish);
     }
 
     // 修改菜品价格
@@ -49,6 +49,8 @@ public class DishController {
     public Response<Dish> updatePrice(@PathVariable int id,@PathVariable double price) {
         return dishService.updatePrice(id,price);
     }
+
+
 
     // 点赞
     @PutMapping("/update/addLike/{id}")

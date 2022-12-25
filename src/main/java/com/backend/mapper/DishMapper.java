@@ -10,17 +10,16 @@ import java.util.List;
 @Repository
 public interface DishMapper {
     // 新增菜品
-    @Insert("insert into dish values(#{p_id},#{discount},#{price},#{sale},#{d_likes},#{d_dislikes})")
+    @Insert("insert into dish values(#{p_id},#{name},#{curPrice},#{price},#{sale},#{d_likes},#{d_dislikes},#{imgUrl},#{isHot},#{isTop},#{ingredient},#{isOver})")
     @Options(useGeneratedKeys = true,keyProperty = "d_id",keyColumn = "d_id")
     int insert(Dish dish);
+
+    @Update("update dish set name = #{name},curPrice = #{curPrice},price = #{price},imgUrl = #{imgUrl},isHot = #{isHot},isTop = #{isTop},ingredient = #{ingredient},isOver = #{isOver} where d_id = #{d_id}")
+    int updateDish(Dish dish);
 
     // 删除菜品
     @Delete("delete from dish where d_id=#{d_id}")
     int removeById(@Param("d_id") int id);
-
-    // 修改折扣
-    @Update("update dish set discount = #{discount} where d_id = #{d_id}")
-    int updateDiscount(@Param("d_id") int id, @Param("discount") double discount);
 
     // 修改价格
     @Update("update dish set price = #{price} where d_id = #{d_id}")

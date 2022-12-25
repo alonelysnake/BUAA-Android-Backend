@@ -7,13 +7,22 @@ public class Activity {
     private LocalDateTime start;
     private LocalDateTime end;
     private int a_id;
-    //TODO 活动信息
+    private String imgUrl;
+    private String description;
 
-
-    public Activity(LocalDateTime start, LocalDateTime end, int a_id) {
+    public Activity(LocalDateTime start, int a_id, String imgUrl, String description) {
         this.start = start;
-        this.end = end;
         this.a_id = a_id;
+        this.imgUrl = imgUrl;
+        this.description = description;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public int getAct_id() {

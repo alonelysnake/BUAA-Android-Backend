@@ -41,10 +41,10 @@ public class DishService {
         return pageBean;
     }
 
-    public Response<Dish> updateDiscount(int id,double discount) {
-        int success = dishMapper.updateDiscount(id,discount);
+    public Response<Dish> updateDish(Dish dish) {
+        int success = dishMapper.updateDish(dish);
         Response<Dish> res = new Response<>();
-        res.setInfo(success,"修改折扣成功","修改折扣失败");
+        res.setInfo(success,"修改商品成功","修改商品失败");
         return res;
     }
 
