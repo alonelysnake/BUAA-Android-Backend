@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface DishIndentMapper {
     //新增订单-菜品信息
-    @Insert("insert into dishIndent value(#{o_id},#{d_id})")
+    @Insert("insert into dishIndent value(#{o_id},#{d_id},#{sum})")
     int insert(DishIndent dishIndent);
 
     //查询订单对应菜品id
