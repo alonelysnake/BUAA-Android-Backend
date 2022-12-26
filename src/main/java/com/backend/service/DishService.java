@@ -41,6 +41,46 @@ public class DishService {
         return pageBean;
     }
 
+    public PageBean<Dish> findDishByName(Integer currentPage, Integer pageSize, String name) {
+        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
+        PageHelper.startPage(currentPage, pageSize);
+        List<Dish> dishes = dishMapper.findByName(name);
+        int countNums = dishMapper.countDishByName(name);            //总记录数
+        PageBean<Dish> pageBean = new PageBean<>();
+        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
+        return pageBean;
+    }
+
+    public PageBean<Dish> findDishByPrice(Integer currentPage, Integer pageSize, double from,double to) {
+        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
+        PageHelper.startPage(currentPage, pageSize);
+        List<Dish> dishes = dishMapper.findByPrice(from,to);
+        int countNums = dishMapper.countDishByPrice(from,to);            //总记录数
+        PageBean<Dish> pageBean = new PageBean<>();
+        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
+        return pageBean;
+    }
+
+    public PageBean<Dish> findDishByLowestPrice(Integer currentPage, Integer pageSize, double to) {
+        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
+        PageHelper.startPage(currentPage, pageSize);
+        List<Dish> dishes = dishMapper.findByLowestPrice(to);
+        int countNums = dishMapper.countDishByLowestPrice(to);            //总记录数
+        PageBean<Dish> pageBean = new PageBean<>();
+        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
+        return pageBean;
+    }
+
+    public PageBean<Dish> findDishByHighestPrice(Integer currentPage, Integer pageSize, double to) {
+        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
+        PageHelper.startPage(currentPage, pageSize);
+        List<Dish> dishes = dishMapper.findByHighestPrice(to);
+        int countNums = dishMapper.countDishByHighestPrice(to);            //总记录数
+        PageBean<Dish> pageBean = new PageBean<>();
+        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
+        return pageBean;
+    }
+
     public Response<Dish> updateDish(Dish dish) {
         int success = dishMapper.updateDish(dish);
         Response<Dish> res = new Response<>();

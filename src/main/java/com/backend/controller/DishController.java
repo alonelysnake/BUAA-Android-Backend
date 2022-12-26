@@ -30,10 +30,46 @@ public class DishController {
     /**
      * 传入 当前页,页大小,商家id
      * */
-    @RequestMapping(value = "/pages/{curPage}/{pageSize}/{p_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/pages_id/{curPage}/{pageSize}/{p_id}",method = RequestMethod.GET)
     @ResponseBody
     public PageBean<Dish> findDishByProvider(@PathVariable int curPage, @PathVariable int pageSize, @PathVariable int p_id){
         return dishService.findDishByProvider(curPage,pageSize,p_id);
+    }
+
+    /**
+     * 传入 当前页,页大小,商品名字
+     * */
+    @RequestMapping(value = "/pages_name/{curPage}/{pageSize}/{name}",method = RequestMethod.GET)
+    @ResponseBody
+    public PageBean<Dish> findDishByName(@PathVariable int curPage, @PathVariable int pageSize, @PathVariable String name){
+        return dishService.findDishByName(curPage,pageSize,name);
+    }
+
+    /**
+     * 传入 当前页,页大小,商品最低价，商品最高价
+     * */
+    @RequestMapping(value = "/pages_price/{curPage}/{pageSize}/{from}/{to}",method = RequestMethod.GET)
+    @ResponseBody
+    public PageBean<Dish> findDishByPrice(@PathVariable int curPage, @PathVariable int pageSize, @PathVariable double from,@PathVariable double to){
+        return dishService.findDishByPrice(curPage,pageSize,from,to);
+    }
+
+    /**
+     * 传入 当前页,页大小,商品最低价
+     * */
+    @RequestMapping(value = "/pages_lowest_price/{curPage}/{pageSize}/{from}",method = RequestMethod.GET)
+    @ResponseBody
+    public PageBean<Dish> findDishByLowestPrice(@PathVariable int curPage, @PathVariable int pageSize, @PathVariable double from){
+        return dishService.findDishByLowestPrice(curPage,pageSize,from);
+    }
+
+    /**
+     * 传入 当前页,页大小,商品最高价
+     * */
+    @RequestMapping(value = "/pages_highest_price/{curPage}/{pageSize}/{to}",method = RequestMethod.GET)
+    @ResponseBody
+    public PageBean<Dish> findDishByHighestPrice(@PathVariable int curPage, @PathVariable int pageSize,@PathVariable double to){
+        return dishService.findDishByHighestPrice(curPage,pageSize,to);
     }
 
     // 修改菜品
@@ -49,8 +85,6 @@ public class DishController {
     public Response<Dish> updatePrice(@PathVariable int id,@PathVariable double price) {
         return dishService.updatePrice(id,price);
     }
-
-
 
     // 点赞
     @PutMapping("/update/addLike/{id}")

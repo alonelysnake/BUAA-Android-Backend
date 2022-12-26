@@ -48,6 +48,30 @@ public interface DishMapper {
     @Select("select count(*) from dish where p_id = #{p_id}")
     int countDishByPid(@Param("p_id") int pid);
 
+    @Select("select * from dish where name like concat ('%',#{name},'%')")
+    List<Dish> findByName(@Param("name") String name);
+
+    @Select("select count(*) from dish where name like concat ('%',#{name},'%')")
+    int countDishByName(@Param("name") String name);
+
+    @Select("select * from dish where curPrice between #{from} and #{to}")
+    List<Dish> findByPrice(@Param("from") double from,@Param("to") double to);
+
+    @Select("select count(*) from dish where curPrice between #{from} and #{to}")
+    int countDishByPrice(@Param("from") double from,@Param("to") double to);
+
+    @Select("select count(*) from dish where curPrice > #{from}")
+    int countDishByLowestPrice(@Param("from") double from);
+
+    @Select("select * from dish where curPrice > #{from}")
+    List<Dish> findByLowestPrice(@Param("from") double from);
+
+    @Select("select count(*) from dish where curPrice < #{to}")
+    int countDishByHighestPrice(@Param("to") double to);
+
+    @Select("select * from dish where curPrice < #{to}")
+    List<Dish> findByHighestPrice(@Param("to") double to);
+
     @Select("select count(*) from dish")
     int countDish();
 
