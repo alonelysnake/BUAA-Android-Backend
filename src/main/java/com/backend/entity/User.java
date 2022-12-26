@@ -6,6 +6,10 @@ public class User {
     private String u_pw;
     //TODO 其他用户信息
     
+    /*
+    输入：价格区间、
+    
+     */
     
     public User(String u_name, String u_pw) {
         this.u_name = u_name;
