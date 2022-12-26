@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 public class Indent {
     public enum OrderState {
         NOT_PAY,
+        PAID,
+        NOT_ACCEPT,
         ACCEPTED,
         DELIVERING,
         FINISHED,
@@ -14,11 +16,20 @@ public class Indent {
     private int o_id;
     private LocalDateTime o_time;
     private double cost;
-    private OrderState state;
-    private String address;
+    private OrderState state=OrderState.PAID;
+    private String address;//送货地址
     private int u_id;
     private int rider;
     private int p_id;
+    
+    public Indent(LocalDateTime o_time, double cost, String address, int u_id, int rider, int p_id) {
+        this.o_time = o_time;
+        this.cost = cost;
+        this.address = address;
+        this.u_id = u_id;
+        this.rider = rider;
+        this.p_id = p_id;
+    }
     
     public int getId() {
         return o_id;

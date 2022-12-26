@@ -6,7 +6,7 @@ create table indent(
     o_id int not null auto_increment,
     o_time datetime not null ,
     cost double(8,2) not null ,
-    state enum('NOT_PAY','ACCEPTED','DELIVERING','FINISHED','CANCELED') not null,
+    state enum('NOT_PAY','PAID','NOT_ACCEPT','ACCEPTED','DELIVERING','FINISHED','CANCELED') not null,
     addr varchar(50) not null ,
     u_id int not null ,
     rider int,

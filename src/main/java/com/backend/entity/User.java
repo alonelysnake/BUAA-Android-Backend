@@ -1,11 +1,17 @@
 package com.backend.entity;
 
 public class User {
+    public enum RiderState {
+        NO,
+        UNCERTAIN,
+        YES
+    }
+    
     private int u_id;
     private String u_name;
     private String u_pw;
-    private boolean is_rider = false;
-    private boolean is_poor = false;
+    private RiderState is_rider = RiderState.NO;
+    private RiderState is_poor = RiderState.NO;
     private String photo;
     private String phone;
     private String address;

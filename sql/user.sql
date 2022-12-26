@@ -6,7 +6,7 @@ create table user(
     u_id int not null auto_increment,
     u_name varchar(10) unique,
     u_pw varchar(15) not null,
-    is_rider boolean default false,
+    rider_state enum('NO','UNCERTAIN','YES') default 'NO',
     is_poor boolean default false,
     photo varchar(255),
     phone varchar(15),
