@@ -58,5 +58,9 @@ public interface ProviderMapper {
     
     //统计用户（根据用户id+密码）
     @Select("select count(*) from provider where p_id = #{pid} and p_pw = #{pwd}")
-    int countBy(@Param("pid")int pid,@Param("pwd")String password);
+    int countByIdAndPwd(@Param("pid")int pid,@Param("pwd")String password);
+    
+    //统计用户（根据用户name+密码）
+    @Select("select count(*) from provider where p_name = #{name} and p_pw = #{pwd}")
+    int countByNameAndPwd(@Param("name")String name, @Param("pwd")String password);
 }

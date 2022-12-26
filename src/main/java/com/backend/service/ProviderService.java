@@ -1,50 +1,53 @@
 package com.backend.service;
 
 import com.backend.utils.Response;
+import com.backend.entity.Provider;
 import com.backend.entity.User;
-import com.backend.mapper.UserMapper;
+import com.backend.mapper.ProviderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class UserService {
+public class ProviderService {
     @Autowired
-    private UserMapper userMapper;
+    private ProviderMapper providerMapper;
     
     //用户注册
-    public Response<User> register(String name, String password) {
-        User user = new User(name, password);
-        Response<User> res = new Response<>();
+    public Response<Provider> register(String name, String password, int district) {
+        Provider provider = new Provider(name, password, district);
+        Response<Provider> res = new Response<>();
         try {
-            int success = userMapper.insert(user);
+            int success = providerMapper.insert(provider);
             if (success == 0) {
                 res.setState(false);
-                res.setMsg("用户已注册");
+                res.setMsg("商家已注册");
             } else {
                 res.setState(true);
-                res.setData(user);
+                res.setData(provider);
             }
         } catch (Exception e) {
             res.setState(false);
             res.setMsg(e.getMessage());
             //TODO 数据库设置了unique约束，实际此处为重复用户
-            res.setMsg("用户名重复");
+            res.setMsg("商家名重复");
             e.printStackTrace();
         }
         return res;
     }
     
     //用户登录
-    public Response<User> login(String name, String password) {
-        Response<User> res = new Response<>();
+    public Response<Provider> login(String name, String password) {
+        Response<Provider> res = new Response<>();
         try {
-            int success = userMapper.countByNameAndPwd(name, password);
+            int success = providerMapper.countByNameAndPwd(name, password);
             if (success == 0) {
                 res.setState(false);
-                res.setMsg("用户名不存在或密码错误");
+                res.setMsg("商家名不存在或密码错误");
             } else {
                 res.setState(true);
-                res.setData(userMapper.getUserByName(name));
+                res.setData(providerMapper.getProviderByName(name));
             }
         } catch (Exception e) {
             res.setState(false);
@@ -59,7 +62,7 @@ public class UserService {
         Response<String> res = new Response<>();
         final String initPassword = "123456";//TODO 初始密码设置?
         try {
-            int success = userMapper.updatePasswordForReset(id, initPassword);
+            int success = providerMapper.updatePasswordForReset(id, initPassword);
             if (success == 0) {
                 res.setState(false);
                 res.setMsg("重置密码失败");
@@ -75,11 +78,16 @@ public class UserService {
         return res;
     }
     
-    public Response<User> getInfoById(int id) {
-        Response<User> res = new Response<>();
+    /**
+     * 只得到Provider实体表中的信息
+     * @param id
+     * @return
+     */
+    public Response<Provider> getProviderById(int id) {
+        Response<Provider> res = new Response<>();
         try {
-            User user = userMapper.getUserById(id);
-            res.setData(user);
+            Provider provider = providerMapper.getProviderById(id);
+            res.setData(provider);
             res.setState(true);
         } catch (Exception e) {
             res.setState(false);

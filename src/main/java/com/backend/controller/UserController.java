@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import com.backend.service.FriendService;
 import com.backend.utils.Response;
 import com.backend.entity.User;
 import com.backend.service.UserService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserService userServive;
+    @Autowired
+    private FriendService friendService;
     
     @RequestMapping(path = "/register/{name}/{password}", method = RequestMethod.GET)
     @ResponseBody
@@ -34,4 +37,13 @@ public class UserController {
     }
     
     //TODO 用户详细信息查询
+    @RequestMapping(path = "/getInfo/{id}")
+    public Response<User> getInfo(@PathVariable int id) {
+        return userServive.getInfoById(id);
+    }
+    
+    @RequestMapping(path = "/getInfo/{uid}/{fid}")
+    public Response<String> addFriend(@PathVariable String uid, @PathVariable String fid) {
+        return friendService.addFriend(Integer.parseInt(uid), Integer.parseInt(fid));
+    }
 }
