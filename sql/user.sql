@@ -6,6 +6,11 @@ create table user(
     u_id int not null auto_increment,
     u_name varchar(10) unique,
     u_pw varchar(15) not null,
+    is_rider boolean default false,
+    is_poor boolean default false,
+    photo varchar(255),
+    phone varchar(15),
+    address varchar(100),
     primary key (u_id)
 )default CHARSET=utf8;
 

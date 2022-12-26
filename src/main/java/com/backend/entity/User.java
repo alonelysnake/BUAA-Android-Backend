@@ -4,6 +4,11 @@ public class User {
     private int u_id;
     private String u_name;
     private String u_pw;
+    private boolean is_rider = false;
+    private boolean is_poor = false;
+    private String photo;
+    private String phone;
+    private String address;
     //TODO 其他用户信息
     
     /*
