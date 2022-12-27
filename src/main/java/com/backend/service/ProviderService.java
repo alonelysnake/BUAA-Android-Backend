@@ -15,8 +15,8 @@ public class ProviderService {
     private ProviderMapper providerMapper;
     
     //用户注册
-    public Response<Provider> register(String name, String password, int district) {
-        Provider provider = new Provider(name, password, district);
+    public Response<Provider> register(String id, String name, String password, int district) {
+        Provider provider = new Provider(id,name, password, district);
         Response<Provider> res = new Response<>();
         try {
             int success = providerMapper.insert(provider);

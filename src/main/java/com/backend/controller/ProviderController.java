@@ -27,10 +27,10 @@ public class ProviderController {
      * @param district_id
      * @return 注册成功的商家实体类
      */
-    @RequestMapping(path = "/register/{name}/{password}/{district_id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/register/{id}/{name}/{password}/{district_id}", method = RequestMethod.GET)
     @ResponseBody
-    public Response<Provider> register(@PathVariable String name, @PathVariable String password, @PathVariable int district_id) {
-        return providerService.register(name, password, district_id);
+    public Response<Provider> register(@PathVariable String id, @PathVariable String name, @PathVariable String password, @PathVariable int district_id) {
+        return providerService.register(id, name, password, district_id);
     }
     
     /**
@@ -48,6 +48,7 @@ public class ProviderController {
     
     /**
      * 商家重置密码
+     *
      * @param id
      * @return 重置初始密码为123456
      */
@@ -58,6 +59,7 @@ public class ProviderController {
     
     /**
      * 获取单个商家的全部信息
+     *
      * @param id
      * @return
      */
