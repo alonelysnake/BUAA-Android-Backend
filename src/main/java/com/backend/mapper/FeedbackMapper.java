@@ -25,6 +25,9 @@ public interface FeedbackMapper {
     @Delete("delete from feedback where fb_id = #{id}")
     int removeById(@Param("id") int id);
     
+    @Select("select * from feedback")
+    List<Feedback> listAll();
+    
     //按用户id查某用户的所有反馈
     @Select("select * from feedback where u_id = #{uid}")
     List<Feedback> listByUserId(@Param("uid") int uid);

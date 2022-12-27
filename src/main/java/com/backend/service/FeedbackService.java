@@ -56,7 +56,7 @@ public class FeedbackService {
         return res;
     }
     
-    public Response<List<Feedback>> getFeedbacks(int uid) {
+    public Response<List<Feedback>> getUserFeedbacks(int uid) {
         Response<List<Feedback>> res = new Response<>();
         try {
             List<Feedback> feedbacks = feedbackMapper.listByUserId(uid);
@@ -72,6 +72,32 @@ public class FeedbackService {
             res.setMsg(e.getMessage());
             e.printStackTrace();
         }
+        return res;
+    }
+    
+    //获取管理员处理的反馈
+    public Response<List<Feedback>> getAdminFeedbacks(int aid) {
+        Response<List<Feedback>> res = new Response<>();
+        try {
+            List<Feedback> feedbacks = feedbackMapper.listByAdminId(aid);
+            if (feedbacks == null) {
+                res.setState(false);
+                res.setMsg("获取反馈失败");
+            } else {
+                res.setState(true);
+                res.setData(feedbacks);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
+    public Response<List<Feedback>> getAll() {
+        Response<List<Feedback>> res = new Response<>();
+        res.setData(feedbackMapper.listAll());
         return res;
     }
 }
