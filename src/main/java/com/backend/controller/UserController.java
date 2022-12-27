@@ -46,4 +46,6 @@ public class UserController {
     public Response<String> addFriend(@PathVariable String uid, @PathVariable String fid) {
         return friendService.addFriend(Integer.parseInt(uid), Integer.parseInt(fid));
     }
+    
+    //TODO 用户信息补全
 }

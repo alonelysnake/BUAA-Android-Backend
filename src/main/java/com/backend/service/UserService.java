@@ -6,6 +6,10 @@ import com.backend.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class UserService {
     @Autowired
@@ -75,6 +79,7 @@ public class UserService {
         return res;
     }
     
+    // 根据用户id得到用户个人信息
     public Response<User> getInfoById(int id) {
         Response<User> res = new Response<>();
         try {
@@ -86,6 +91,49 @@ public class UserService {
             res.setMsg(e.getMessage());
             e.printStackTrace();
         }
+        return res;
+    }
+    
+    //得到所有未认证的骑手
+    public Response<List<User>> getUncertainRider() {
+        Response<List<User>> res = new Response<>();
+        res.setData(userMapper.listUncertainRider());
+        return res;
+    }
+    
+    //得到所有未认证的贫困生
+    public Response<List<User>> getUncertainPoor() {
+        Response<List<User>> res = new Response<>();
+        res.setData(userMapper.listUncertainPoor());
+        return res;
+    }
+    
+    public Response<Map<String, Object>> getRiderInfo(int id) {
+        Response<Map<String, Object>> res = new Response<>();
+        try {
+            User rider = userMapper.getUserById(id);
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("userName", rider.getName());
+            data.put("contact", rider.getContact());
+            data.put("accoutName", rider.getAccoutName());
+            data.put("password", rider.getPassword());
+            data.put("realName", rider.getRealName());
+            data.put("stuId", rider.getStuId());
+            data.put("school", rider.getSchool());
+            res.setState(true);
+            res.setData(data);
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
+    public Response<Boolean> changeRiderInfo(String accountName, String contact, String password, String realName, String school, String stuId, String userName) {
+        int success = userMapper.updateById(accountName, contact, password, realName, school, stuId, userName);
+        Response<Boolean> res = new Response<>();
+        res.setInfo(success, "修改成功", "修改失败", success == 1);
         return res;
     }
 }

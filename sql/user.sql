@@ -11,6 +11,11 @@ create table user(
     photo varchar(255),
     phone varchar(15),
     address varchar(100),
+    contact varchar(100),
+    real_name varchar(20),
+    stu_id varchar(15),
+    school varchar(50),
+
     primary key (u_id)
 )default CHARSET=utf8;
 

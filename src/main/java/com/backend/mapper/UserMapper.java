@@ -44,7 +44,16 @@ public interface UserMapper {
     @Update("update user set u_pw = #{new_pwd} where u_id = #{uid} and u_pw = #{old_pwd}")
     int updatePassword(@Param("uid") int uid, @Param("old_pwd") String oldPassword, @Param("new_pwd") String newPassword);
     
-    //TODO 修改个人信息
+    //TODO 修改骑手个人信息（哪个参数是主键?）
+    @Update("update user set accout_name=#{accout_name}, contact=#{contact},u_pw=#{pwd}," +
+            "real_name=#{real_name},school=#{school},stu_id=#{stu_id} where u_name=#{u_name}")
+    int updateById(@Param("accout_name")String accountName,
+                   @Param("contact")String contact,
+                   @Param("pwd")String password,
+                   @Param("real_name")String realName,
+                   @Param("school")String school,
+                   @Param("stu_id")String stuId,
+                   @Param("u_name")String userName);
     
     //统计用户（根据用户id+密码）
     @Select("select count(*) from user where u_id = #{uid} and u_pw = #{pwd}")
@@ -53,4 +62,12 @@ public interface UserMapper {
     //统计用户（根据用户name+密码）
     @Select("select count(*) from user where u_name = #{name} and u_pw = #{pwd}")
     int countByNameAndPwd(@Param("name")String name, @Param("pwd")String password);
+    
+    // 返回骑手待认证的用户
+    @Select("select * from user where rider_state = 'UNCERTAIN'")
+    List<User> listUncertainRider();
+    
+    // 返回贫困生待认证
+    @Select("select * from user where poor_state = 'UNCERTAIN'")
+    List<User> listUncertainPoor();
 }
