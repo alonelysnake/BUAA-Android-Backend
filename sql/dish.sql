@@ -16,6 +16,7 @@ create table dish(
     isTop boolean not null ,
     ingredient varchar(1024),
     isOver boolean not null ,
+    pinyin varchar(512) not null ,
     primary key (d_id),
     foreign key (p_id) references provider(p_id)
 )default charset=utf8;

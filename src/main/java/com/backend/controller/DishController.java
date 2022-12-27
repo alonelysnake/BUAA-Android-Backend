@@ -1,11 +1,18 @@
 package com.backend.controller;
 
 import com.backend.entity.Dish;
+import com.backend.entity.Indent;
 import com.backend.service.DishService;
+import com.backend.utils.ChangeChinesePinyin;
 import com.backend.utils.PageBean;
 import com.backend.utils.Response;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.backend.utils.ChangeChinesePinyin.changeChinesePinyin;
 
 @RestController
 @RequestMapping("/dish")
@@ -16,8 +23,14 @@ public class DishController {
     // 添加菜品
     @PostMapping("/insert")
     @ResponseBody
-    public Response<Dish> insertDish(@RequestBody Dish dish) {
+    public Response<Dish> insertDish(@RequestBody Dish dish) throws BadHanyuPinyinOutputFormatCombination {
+        dish.setPinyin(changeChinesePinyin(dish.getName()).get("fullPinyin"));
         return dishService.insertDish(dish);
+    }
+
+    @RequestMapping(value = "/getDishBySpeech/{pinyin}",method = RequestMethod.GET)
+    public Response<List<Dish>> getUserIndent(@PathVariable String pinyin) {
+        return dishService.getDishBySpeech(pinyin);
     }
 
     // 删除菜品

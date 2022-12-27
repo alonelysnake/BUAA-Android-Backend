@@ -14,6 +14,15 @@ public class Dish {
     private String ingredient;
     private String name;
     private boolean isOver;
+    private String pinyin;
+
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
+    }
+
+    public String getPinyin() {
+        return pinyin;
+    }
 
     public boolean isOver() {
         return isOver;

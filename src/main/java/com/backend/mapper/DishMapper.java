@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface DishMapper {
     // 新增菜品
-    @Insert("insert into dish values(#{p_id},#{name},#{curPrice},#{price},#{sale},#{d_likes},#{d_dislikes},#{imgUrl},#{isHot},#{isTop},#{ingredient},#{isOver})")
+    @Insert("insert into dish values(#{p_id},#{name},#{curPrice},#{price},#{sale},#{d_likes},#{d_dislikes},#{imgUrl},#{isHot},#{isTop},#{ingredient},#{isOver},#{pinyin})")
     @Options(useGeneratedKeys = true,keyProperty = "d_id",keyColumn = "d_id")
     int insert(Dish dish);
 
@@ -50,6 +50,9 @@ public interface DishMapper {
 
     @Select("select * from dish where name like concat ('%',#{name},'%')")
     List<Dish> findByName(@Param("name") String name);
+
+    @Select("select * from dish where pinyin like concat ('%',#{pinyin},'%')")
+    List<Dish> findByPinyin(@Param("pinyin") String pinyin);
 
     @Select("select count(*) from dish where name like concat ('%',#{name},'%')")
     int countDishByName(@Param("name") String name);

@@ -1,6 +1,7 @@
 package com.backend.service;
 
 import com.backend.entity.Dish;
+import com.backend.entity.Dish;
 import com.backend.mapper.DishMapper;
 import com.backend.utils.PageBean;
 import com.backend.utils.Response;
@@ -22,7 +23,26 @@ public class DishService {
         res.setInfo(success,"添加菜品成功","添加菜品失败");
         return res;
     }
-    
+
+    public Response<List<Dish>> getDishBySpeech(String pinyin) {
+        Response<List<Dish>> res = new Response<>();
+        try {
+            List<Dish> dishes = dishMapper.findByPinyin(pinyin);
+            if (dishes == null) {
+                res.setState(false);
+                res.setMsg("获取菜品失败");
+            } else {
+                res.setState(true);
+                res.setData(dishes);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     // 删除菜品
     public Response<Dish> deleteDish(int id) {
         int success = dishMapper.removeById(id);
