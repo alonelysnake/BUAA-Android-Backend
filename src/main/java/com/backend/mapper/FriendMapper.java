@@ -22,5 +22,5 @@ public interface FriendMapper {
     
     //得到某用户的所有好友id
     @Select("select f_id from friend where u_id = #{uid}")
-    List<Integer> listFriendId(@Param("uid") String user);
+    List<String> listFriendId(@Param("uid") String user);
 }

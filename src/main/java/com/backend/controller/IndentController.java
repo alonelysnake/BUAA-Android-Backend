@@ -40,37 +40,39 @@ public class IndentController {
     canceled:用户已取消
      */
     @RequestMapping(path = "/getUserIndent/{id}/{state}")
-    public Response<List<Indent>> getUserIndent(@PathVariable int id, @PathVariable String state) {
+    public Response<List<Indent>> getUserIndent(@PathVariable String id, @PathVariable String state) {
         return indentService.getUserIndents(id, Indent.OrderState.valueOf(state.toUpperCase()));
     }
     
     //TODO 查看单个订单的详细信息（统一Response?）
     @RequestMapping(path = "/getInfo/{id}")
     public Response<Map<String, Object>> getInfo(@PathVariable int id) {
-//        Indent indent = indentService.getIndentInfo(id).getData();
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("订单基本信息", indent);
-//        //TODO DishIndentService调用方法
-//        Map<Integer, Integer> dishIndent = new HashMap<>();
-//        map.put("所有菜品信息菜id-菜量", dishIndent);
-//        return map;
+        Response<Map<String, Object>> res = new Response<>();
+        Response<Indent> indentResponse = indentService.getIndentInfo(id);
+        if (!indentResponse.getState()) {
+            res.setState(false);
+            res.setMsg("获取订单基本信息（除菜品外的）失败");
+        } else {
+            Map<String, Object> map = new HashMap<>();
+            map.put("info", indentResponse.getData());//info:基本信息 dishes:点的所有菜
+            //TODO DishIndentService调用方法
+            try {
+                List<DishIndent> dishIndents = dishIndentService.findByOid(id);
+                List<HashMap<String, Integer>> dishes = new ArrayList<>();
+                for (DishIndent dishIndent : dishIndents) {
+                    HashMap<String, Integer> dish = new HashMap<>();
+                    dish.put("dish_id", dishIndent.getDishId());
+                    dish.put("num", dishIndent.getSum());
+                    dishes.add(dish);
+                }
+                map.put("dishes", dishes);//所有菜品信息list，包含{dish_id:菜的id,num:点的数量}
+            } catch (Exception e) {
+                res.setState(false);
+                res.setMsg("获取订单菜品信息失败");
+            }
+        }
         
-        //TODO 测试 以map形式回传的正确性
-        Response<Map<String,Object>> response=new Response<>();
-        HashMap<String,Object>data=new HashMap<>();
-        data.put("username","ljh");
-        data.put("age",123);
-        data.put("flag",true);
-        ArrayList<HashMap<Integer,Integer>> list=new ArrayList<>();
-        HashMap<Integer,Integer> map=new HashMap<>();
-        map.put(114,514);
-        map.put(810,975);
-        list.add(new HashMap<>(map));
-        map.put(93,589);
-        list.add(map);
-        data.put("list",list);
-        response.setData(data);
-        return response;
+        return res;
     }
     
     //创建订单

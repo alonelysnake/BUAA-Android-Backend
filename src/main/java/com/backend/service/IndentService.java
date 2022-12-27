@@ -54,7 +54,7 @@ public class IndentService {
     }
     
     //获取用户所有订单
-    public Response<List<Indent>> getUserIndents(int uid) {
+    public Response<List<Indent>> getUserIndents(String uid) {
         Response<List<Indent>> res = new Response<>();
         try {
             List<Indent> indents = indentMapper.listByUser(uid);
@@ -74,7 +74,7 @@ public class IndentService {
     }
     
     //按照订单状态获取所有订单
-    public Response<List<Indent>> getUserIndents(int uid, Indent.OrderState state) {
+    public Response<List<Indent>> getUserIndents(String uid, Indent.OrderState state) {
         Response<List<Indent>> res = new Response<>();
         try {
             List<Indent> indents = indentMapper.listByUserAndState(uid, state);
@@ -94,7 +94,7 @@ public class IndentService {
     }
     
     //获取商家所有订单
-    public Response<List<Indent>> getProviderIndents(int pid) {
+    public Response<List<Indent>> getProviderIndents(String pid) {
         Response<List<Indent>> res = new Response<>();
         try {
             List<Indent> indents = indentMapper.listByProvider(pid);
@@ -114,7 +114,7 @@ public class IndentService {
     }
     
     //按照商家和订单状态获取所有订单
-    public Response<List<Indent>> getProviderIndents(int pid, Indent.OrderState state) {
+    public Response<List<Indent>> getProviderIndents(String pid, Indent.OrderState state) {
         Response<List<Indent>> res = new Response<>();
         try {
             List<Indent> indents = indentMapper.listByProviderAndState(pid, state);
@@ -134,7 +134,7 @@ public class IndentService {
     }
     
     //获取骑手所有订单
-    public Response<List<Indent>> getRiderIndents(int rid) {
+    public Response<List<Indent>> getRiderIndents(String rid) {
         Response<List<Indent>> res = new Response<>();
         try {
             List<Indent> indents = indentMapper.listByRider(rid);
@@ -154,7 +154,7 @@ public class IndentService {
     }
     
     //按照订单状态获取骑手所有订单
-    public Response<List<Indent>> getRiderIndents(int rid, Indent.OrderState state) {
+    public Response<List<Indent>> getRiderIndents(String rid, Indent.OrderState state) {
         Response<List<Indent>> res = new Response<>();
         try {
             List<Indent> indents = indentMapper.listByRiderAndState(rid, state);
@@ -175,7 +175,13 @@ public class IndentService {
     
     public Response<Indent> getIndentInfo(int oid) {
         Response<Indent> res = new Response<>();
-        res.setData(indentMapper.getIdentById(oid));
+        try {
+            res.setData(indentMapper.getIdentById(oid));
+            res.setState(true);
+        } catch (Exception e) {
+            res.setState(false);
+            e.printStackTrace();
+        }
         return res;
     }
 }

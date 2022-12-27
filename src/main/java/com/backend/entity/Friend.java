@@ -1,14 +1,14 @@
 package com.backend.entity;
 
 public class Friend {
-    private int u_id;
-    private int f_id;
+    private String  u_id;
+    private String  f_id;
     
-    public int getUserId() {
+    public String  getUserId() {
         return u_id;
     }
     
-    public int getFriendId() {
+    public String  getFriendId() {
         return f_id;
     }
 }
