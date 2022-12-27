@@ -1,5 +1,6 @@
 package com.backend.controller;
 
+import com.backend.service.RiderService;
 import com.backend.service.UserService;
 import com.backend.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +14,26 @@ import java.util.Map;
 @RequestMapping("rider")
 public class RiderController {
     @Autowired
-    private UserService userService;
+    private RiderService riderService;
     
+    //TODO 创建骑手（待认证）
+    
+    
+    //获取骑手信息
     @RequestMapping(path = "/getInfo/{id}")
     public Response<Map<String, Object>> getInfo(@PathVariable int id) {
-        return userService.getRiderInfo(id);
+        return riderService.getRiderInfo(id);
     }
     
-    //TODO 还应该提供用户名或用户id（不是骑手的）
-    @RequestMapping(path = "/changeInfo/{userName}/{contact}/{accountName}/{password}/{realName}/{stuId}/{school}")
-    public Response<Boolean> getInfo(@PathVariable String accountName,
-                                     @PathVariable String contact,
+    //修改骑手信息
+    @RequestMapping(path = "/changeInfo/{userName}/{contact}/{password}/{realName}/{stuId}/{school}")
+    public Response<Boolean> getInfo(@PathVariable String contact,
                                      @PathVariable String password,
                                      @PathVariable String realName,
                                      @PathVariable String school,
                                      @PathVariable String stuId,
                                      @PathVariable String userName) {
         
-        return userService.changeRiderInfo(accountName, contact, password, realName, school, stuId, userName);
+        return riderService.changeInfo(contact, password, realName, school, stuId, userName);
     }
 }
