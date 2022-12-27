@@ -19,32 +19,32 @@ public class UserController {
     @Autowired
     private FriendService friendService;
     
-    @RequestMapping(path = "/register/{name}/{password}", method = RequestMethod.GET)
+    @RequestMapping(path = "/register/{id}/{name}/{password}", method = RequestMethod.GET)
     @ResponseBody
-    public Response<User> register(@PathVariable String name, @PathVariable String password) {
-        return userServive.register(name, password);
+    public Response<User> register(@PathVariable String id,@PathVariable String name, @PathVariable String password) {
+        return userServive.register(id, name, password);
     }
     
-    @RequestMapping(path = "/login/{name}/{password}", method = RequestMethod.GET)
+    @RequestMapping(path = "/login/{id}/{password}", method = RequestMethod.GET)
     @ResponseBody
-    public Response<User> login(@PathVariable String name, @PathVariable String password) {
-        return userServive.login(name, password);
+    public Response<User> login(@PathVariable String id, @PathVariable String password) {
+        return userServive.login(id, password);
     }
     
     @RequestMapping(path = "/reset/{id}")
-    public Response<String> reset(@PathVariable int id) {
+    public Response<String> reset(@PathVariable String id) {
         return userServive.resetPassword(id);
     }
     
     //TODO 用户详细信息查询
     @RequestMapping(path = "/getInfo/{id}")
-    public Response<User> getInfo(@PathVariable int id) {
+    public Response<User> getInfo(@PathVariable String id) {
         return userServive.getInfoById(id);
     }
     
     @RequestMapping(path = "/getInfo/{uid}/{fid}")
     public Response<String> addFriend(@PathVariable String uid, @PathVariable String fid) {
-        return friendService.addFriend(Integer.parseInt(uid), Integer.parseInt(fid));
+        return friendService.addFriend(uid, fid);
     }
     
     //TODO 用户信息补全

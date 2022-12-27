@@ -10,7 +10,7 @@ public class FriendService {
     @Autowired
     private FriendMapper friendMapper;
     
-    public Response<String> addFriend(int uid, int fid) {
+    public Response<String> addFriend(String uid, String fid) {
         Response<String> res = new Response<>();
         try {
             int success = friendMapper.insert(uid, fid);
@@ -29,7 +29,7 @@ public class FriendService {
         return res;
     }
     
-    public Response<String> remove(int uid, int fid) {
+    public Response<String> remove(String uid, String fid) {
         Response<String> res = new Response<>();
         try {
             int success = friendMapper.remove(uid, fid);

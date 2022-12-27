@@ -14,13 +14,13 @@ import java.util.List;
 public interface FriendMapper {
     //增加新的好友关系
     @Insert("insert into friend(u_id, f_id) values (#{uid}, #{fid})")
-    int insert(@Param("uid") int user, @Param("fid") int friend);
+    int insert(@Param("uid") String user, @Param("fid") String friend);
     
     //删除好友关系
     @Delete("delete from friend where u_id = #{uid} and f_id = #{fid}")
-    int remove(@Param("uid") int user, @Param("fid") int friend);
+    int remove(@Param("uid") String user, @Param("fid") String friend);
     
     //得到某用户的所有好友id
     @Select("select f_id from friend where u_id = #{uid}")
-    List<Integer> listFriendId(@Param("uid") int user);
+    List<Integer> listFriendId(@Param("uid") String user);
 }
