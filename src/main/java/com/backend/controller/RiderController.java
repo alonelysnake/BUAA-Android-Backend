@@ -36,4 +36,10 @@ public class RiderController {
         
         return riderService.changeInfo(contact, password, realName, school, stuId, userName);
     }
+    
+    //骑手数量
+    @RequestMapping(path = "/getRiderNum")
+    public Response<Integer> getRiderNum() {
+        return riderService.getRiderNum();
+    }
 }

@@ -42,4 +42,11 @@ public class RiderService {
         res.setInfo(success, "修改成功", "修改失败", success == 1);
         return res;
     }
+    
+    public Response<Integer> getRiderNum() {
+        Response<Integer> res = new Response<>();
+        res.setState(true);
+        res.setData(riderMapper.listAll().size());
+        return res;
+    }
 }
