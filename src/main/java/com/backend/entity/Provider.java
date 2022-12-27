@@ -1,7 +1,7 @@
 package com.backend.entity;
 
 public class Provider {
-    private int p_id;
+    private String p_id;
     private String p_name;
     private String p_pw;
     private int scores;//总分
@@ -29,7 +29,7 @@ public class Provider {
         return d_id;
     }
 
-    public int getId() {
+    public String getId() {
         return p_id;
     }
     

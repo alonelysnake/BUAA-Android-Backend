@@ -41,7 +41,7 @@ public class ProviderService {
     public Response<Provider> login(String name, String password) {
         Response<Provider> res = new Response<>();
         try {
-            int success = providerMapper.countByNameAndPwd(name, password);
+            int success = providerMapper.countByIdAndPwd(name, password);
             if (success == 0) {
                 res.setState(false);
                 res.setMsg("商家名不存在或密码错误");
@@ -58,7 +58,7 @@ public class ProviderService {
     }
     
     //重置密码
-    public Response<String> resetPassword(int id) {
+    public Response<String> resetPassword(String id) {
         Response<String> res = new Response<>();
         final String initPassword = "123456";//TODO 初始密码设置?
         try {
@@ -83,7 +83,7 @@ public class ProviderService {
      * @param id
      * @return
      */
-    public Response<Provider> getProviderById(int id) {
+    public Response<Provider> getProviderById(String id) {
         Response<Provider> res = new Response<>();
         try {
             Provider provider = providerMapper.getProviderById(id);

@@ -36,14 +36,14 @@ public class ProviderController {
     /**
      * 商家登录
      *
-     * @param name
+     * @param id
      * @param password
      * @return 登录成功的商家实体类
      */
     @RequestMapping(path = "/login/{name}/{password}", method = RequestMethod.GET)
     @ResponseBody
-    public Response<Provider> login(@PathVariable String name, @PathVariable String password) {
-        return providerService.login(name, password);
+    public Response<Provider> login(@PathVariable String id, @PathVariable String password) {
+        return providerService.login(id, password);
     }
     
     /**
@@ -52,7 +52,7 @@ public class ProviderController {
      * @return 重置初始密码为123456
      */
     @RequestMapping(path = "/reset/{id}")
-    public Response<String> reset(@PathVariable int id) {
+    public Response<String> reset(@PathVariable String id) {
         return providerService.resetPassword(id);
     }
     
@@ -62,7 +62,11 @@ public class ProviderController {
      * @return
      */
     @RequestMapping(path = "/getInfo/{id}")
-    public Response<Provider> getInfo(@PathVariable int id) {
+    public Response<Provider> getInfo(@PathVariable String id) {
         return providerService.getProviderById(id);
     }
+    
+    //TODO 对商家评分
+    
+    //TODO 根据订单获取收益?
 }
