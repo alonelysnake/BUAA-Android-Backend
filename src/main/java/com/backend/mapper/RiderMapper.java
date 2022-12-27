@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface RiderMapper {
@@ -25,4 +27,8 @@ public interface RiderMapper {
                    @Param("school")String school,
                    @Param("r_id")String stuId,
                    @Param("r_name")String userName);
+    
+    //获取所有
+    @Select("select * from rider")
+    List<Rider> listAll();
 }

@@ -21,7 +21,7 @@ public class UserController {
     
     @RequestMapping(path = "/register/{id}/{name}/{password}", method = RequestMethod.GET)
     @ResponseBody
-    public Response<User> register(@PathVariable String id,@PathVariable String name, @PathVariable String password) {
+    public Response<User> register(@PathVariable String id, @PathVariable String name, @PathVariable String password) {
         return userServive.register(id, name, password);
     }
     
@@ -36,15 +36,22 @@ public class UserController {
         return userServive.resetPassword(id);
     }
     
-    //TODO 用户详细信息查询
-    @RequestMapping(path = "/getInfo/{id}")
-    public Response<User> getInfo(@PathVariable String id) {
-        return userServive.getInfoById(id);
-    }
+    //TODO 未完成，用户详细信息查询
+//    @RequestMapping(path = "/getInfo/{id}")
+//    public Response<User> getInfo(@PathVariable String id) {
+//        return userServive.getInfoById(id);
+//    }
     
+    // 添加好友
     @RequestMapping(path = "/getInfo/{uid}/{fid}")
     public Response<String> addFriend(@PathVariable String uid, @PathVariable String fid) {
         return friendService.addFriend(uid, fid);
+    }
+    
+    //得到用户数量
+    @RequestMapping(path = "/getInfo")
+    public Response<Integer> getUserNum() {
+        return userServive.getUserNum();
     }
     
     //TODO 用户信息补全

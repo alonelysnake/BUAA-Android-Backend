@@ -16,7 +16,7 @@ public class ProviderService {
     
     //用户注册
     public Response<Provider> register(String id, String name, String password, int district) {
-        Provider provider = new Provider(id,name, password, district);
+        Provider provider = new Provider(id, name, password, district);
         Response<Provider> res = new Response<>();
         try {
             int success = providerMapper.insert(provider);
@@ -80,6 +80,7 @@ public class ProviderService {
     
     /**
      * 只得到Provider实体表中的信息
+     *
      * @param id
      * @return
      */
@@ -94,6 +95,13 @@ public class ProviderService {
             res.setMsg(e.getMessage());
             e.printStackTrace();
         }
+        return res;
+    }
+    
+    public Response<Integer> getProviderNum() {
+        Response<Integer> res = new Response<>();
+        res.setState(true);
+        res.setData(providerMapper.listAll().size());
         return res;
     }
 }

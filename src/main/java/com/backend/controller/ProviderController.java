@@ -71,4 +71,9 @@ public class ProviderController {
     //TODO 对商家评分
     
     //TODO 根据订单获取收益?
+    
+    @RequestMapping(path = "/getProviderNum")
+    public Response<Integer> getProviderNum() {
+        return providerService.getProviderNum();
+    }
 }

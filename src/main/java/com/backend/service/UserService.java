@@ -79,6 +79,14 @@ public class UserService {
         return res;
     }
     
+    //获取用户数
+    public Response<Integer> getUserNum() {
+        Response<Integer> res = new Response<>();
+        res.setState(true);
+        res.setData(userMapper.listAll().size());
+        return res;
+    }
+    
     // 根据用户id得到用户个人信息
     public Response<User> getInfoById(String id) {
         Response<User> res = new Response<>();
@@ -107,7 +115,7 @@ public class UserService {
         res.setData(userMapper.listUncertainPoor());
         return res;
     }
-    
+
 //    public Response<Map<String, Object>> getRiderInfo(int id) {
 //        Response<Map<String, Object>> res = new Response<>();
 //        try {
@@ -129,7 +137,7 @@ public class UserService {
 //        }
 //        return res;
 //    }
-    
+
 //    public Response<Boolean> changeRiderInfo(String accountName, String contact, String password, String realName, String school, String stuId, String userName) {
 //        int success = userMapper.updateById(accountName, contact, password, realName, school, stuId, userName);
 //        Response<Boolean> res = new Response<>();
