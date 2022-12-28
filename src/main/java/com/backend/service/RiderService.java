@@ -15,7 +15,26 @@ public class RiderService {
     @Autowired
     private RiderMapper riderMapper;
     
-    public Response<Map<String, Object>> getRiderInfo(int id) {
+    public Response<Boolean> login(String id, String password) {
+        Response<Boolean> res = new Response<>();
+        try {
+            Rider rider = riderMapper.getByIdAndPassword(id, password);
+            if (rider == null) {
+                res.setState(false);
+                res.setMsg("用户名不存在或密码错误");
+            } else {
+                res.setState(true);
+                res.setData(true);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
+    public Response<Map<String, Object>> getRiderInfo(String id) {
         Response<Map<String, Object>> res = new Response<>();
         try {
             Rider rider = riderMapper.getById(id);

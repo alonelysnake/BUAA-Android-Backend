@@ -16,7 +16,10 @@ public interface RiderMapper {
     
     //根据id查找用户
     @Select("select * from rider where r_id = #{id}")
-    Rider getById(@Param("id") int id);
+    Rider getById(@Param("id") String id);
+    
+    @Select("select * from rider where r_id = #{id} and r_pw=#{pwd}")
+    Rider getByIdAndPassword(@Param("id") String id, @Param("pwd")String pwd);
     
     //TODO 修改骑手个人信息（哪个参数是主键?）
     @Update("update rider set contact=#{contact},u_pw=#{pwd}," +
