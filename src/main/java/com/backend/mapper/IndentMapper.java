@@ -19,8 +19,8 @@ import java.util.Map;
 @Repository
 public interface IndentMapper {
     // 新增订单
-    @Insert("insert into indent(o_time, cost, state, address, u_id, rider, p_id) " +
-            "values (#{o_time}, #{cost}, #{state}, #{address}, #{u_id}, #{rider}, #{p_id})")
+    @Insert("insert into indent(o_time, cost, state, address, u_id, rider, p_id,o_comment) " +
+            "values (#{o_time}, #{cost}, #{state}, #{address}, #{u_id}, #{rider}, #{p_id}, #{o_comment})")
     @Options(useGeneratedKeys = true, keyProperty = "o_id", keyColumn = "o_id")
     int insert(Indent indent);
     

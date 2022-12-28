@@ -88,7 +88,8 @@ public class IndentController {
         int uid = (int) params.get("");
         int rider = (int) params.get("");
         int pid = (int) params.get("");
-        Indent indent = new Indent(time, cost, address, uid, rider, pid);
+        String comment = (String) params.get("");
+        Indent indent = new Indent(time, cost, address, uid, rider, pid, comment);
         
         //添加订单
         indentService.addIndent(indent);
