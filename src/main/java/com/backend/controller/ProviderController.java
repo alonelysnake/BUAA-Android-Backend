@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 @RestController
 @RequestMapping("provider")
@@ -70,7 +71,17 @@ public class ProviderController {
     
     //TODO 对商家评分
     
-    //TODO 根据订单获取收益?
+    // 一周订单收益
+    @RequestMapping(path = "getProfit/{id}")
+    public Response<List<HashMap<String, Object>>> getProfit(@PathVariable String id) {
+        return providerService.getProfit(id);
+    }
+    
+    // 一周订单数
+    @RequestMapping(path = "getOrderNum/{id}")
+    public Response<List<HashMap<String, Object>>> getOrderNum(@PathVariable String id) {
+        return providerService.getOrderNum(id);
+    }
     
     @RequestMapping(path = "/getProviderNum")
     public Response<Integer> getProviderNum() {

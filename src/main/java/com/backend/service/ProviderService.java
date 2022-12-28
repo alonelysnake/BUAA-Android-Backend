@@ -1,18 +1,27 @@
 package com.backend.service;
 
+import com.backend.entity.Indent;
+import com.backend.mapper.IndentMapper;
 import com.backend.utils.Response;
 import com.backend.entity.Provider;
 import com.backend.entity.User;
 import com.backend.mapper.ProviderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class ProviderService {
     @Autowired
     private ProviderMapper providerMapper;
+    @Autowired
+    private IndentMapper indentMapper;
     
     //用户注册
     public Response<Provider> register(String id, String name, String password, int district) {
@@ -102,6 +111,64 @@ public class ProviderService {
         Response<Integer> res = new Response<>();
         res.setState(true);
         res.setData(providerMapper.listAll().size());
+        return res;
+    }
+    
+    public Response<List<HashMap<String, Object>>> getProfit(@PathVariable String id) {
+        Response<List<HashMap<String, Object>>> res = new Response<>();
+        try {
+            LocalDate baseTime = LocalDate.now().minusDays(7);
+            List<Indent> indents = indentMapper.listByProviderAndState(id, Indent.OrderState.FINISHED);
+            List<HashMap<String, Object>> costs = new ArrayList<>();
+            for (int i = 0; i < 7; i++) {
+                double cost = 0;
+                HashMap<String, Object> oneDay = new HashMap<>();
+                LocalDate date1 = baseTime.plusDays(i);
+                LocalDate date2 = baseTime.plusDays(i + 1);
+                oneDay.put("date", date1);
+                for (Indent indent : indents) {
+                    if (indent.getTime().toLocalDate().isAfter(date1) && indent.getTime().toLocalDate().isBefore(date2)) {
+                        cost += indent.getCost();
+                    }
+                }
+                oneDay.put("money", cost);
+                costs.add(oneDay);
+            }
+            res.setData(costs);
+            res.setState(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setState(false);
+        }
+        return res;
+    }
+    
+    public Response<List<HashMap<String, Object>>> getOrderNum(@PathVariable String id) {
+        Response<List<HashMap<String, Object>>> res = new Response<>();
+        try {
+            LocalDate baseTime = LocalDate.now().minusDays(7);
+            List<Indent> indents = indentMapper.listByProviderAndState(id, Indent.OrderState.FINISHED);
+            List<HashMap<String, Object>> costs = new ArrayList<>();
+            for (int i = 0; i < 7; i++) {
+                int num = 0;
+                HashMap<String, Object> oneDay = new HashMap<>();
+                LocalDate date1 = baseTime.plusDays(i);
+                LocalDate date2 = baseTime.plusDays(i + 1);
+                oneDay.put("date", date1);
+                for (Indent indent : indents) {
+                    if (indent.getTime().toLocalDate().isAfter(date1) && indent.getTime().toLocalDate().isBefore(date2)) {
+                        num++;
+                    }
+                }
+                oneDay.put("num", num);//订单数
+                costs.add(oneDay);
+            }
+            res.setData(costs);
+            res.setState(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setState(false);
+        }
         return res;
     }
 }
