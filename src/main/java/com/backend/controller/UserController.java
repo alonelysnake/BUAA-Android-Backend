@@ -49,8 +49,9 @@ public class UserController {
     }
     
     //得到用户数量
-    @RequestMapping(path = "/getInfo")
+    @RequestMapping(path = "/getUserNum")
     public Response<Integer> getUserNum() {
+        System.out.println("调用user/getUserNum");
         return userServive.getUserNum();
     }
     
