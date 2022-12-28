@@ -14,16 +14,17 @@ public class Indent {
     }
     
     private int o_id;
-    private LocalDateTime o_time;
+    private LocalDateTime o_time;//下单时间
+    private LocalDateTime send_time;//配送时间
     private double cost;
     private OrderState state=OrderState.PAID;
     private String address;//送货地址
     private int u_id;
-    private int rider;
+    private Integer rider;
     private int p_id;
-    private String o_comment;
+    private String o_comment;//备注
 
-    public Indent(LocalDateTime o_time, double cost, String address, int u_id, int rider, int p_id,String o_comment) {
+    public Indent(LocalDateTime o_time, double cost, String address, int u_id, Integer rider, int p_id,String o_comment) {
         this.o_time = o_time;
         this.cost = cost;
         this.address = address;
@@ -61,7 +62,7 @@ public class Indent {
         return u_id;
     }
     
-    public int getRider() {
+    public Integer getRider() {
         return rider;
     }
     

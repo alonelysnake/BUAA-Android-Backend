@@ -6,25 +6,36 @@ import java.io.InputStreamReader;
 
 public class RunPython {
     //运行python文件
-    public static void run() {
+    public static int runSale(String envPath, String filePath, String args) {
+        envPath = "D:\\anaconda3\\python.exe";//运行环境
+        filePath = "E:/coding/JAVA/demo/machine_learning/sales/arima.py";//py文件地址
+        //args为传递的参数，按照 日期（精确到日） 数量 表示
         Process proc;
+        int res = 0;
         try {
             //TODO python.exe路径+要运行的py文件路径+参数
-            proc = Runtime.getRuntime().exec("D:\\anaconda3\\python.exe C:/Users/ljh/Desktop/ARIMA-master/test.py");// 执行py文件
+            proc = Runtime.getRuntime().exec(envPath + " " + filePath + " " + args);// 执行py文件
             //用输入输出流来截取结果
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             
+            String lastLine = "0.0";
             String line = null;
+            
             while ((line = in.readLine()) != null) {
-                System.out.println(line);//每一行即为python的控制台输出
+                //System.out.println(line);//每一行即为python的控制台输出
+                lastLine = line;
+                //System.out.println(line);
+                //System.out.println(lastLine);
             }
+            res = (int) Double.parseDouble(lastLine);
             in.close();
             proc.waitFor();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+        return res;
     }
-
+    
     public static void runSpeech() {
         Process proc;
         try {
