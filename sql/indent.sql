@@ -11,6 +11,7 @@ create table indent(
     u_id varchar(15) not null ,
     rider varchar(15),
     p_id varchar(15) not null ,
+    o_comment varchar(512),
     primary key (o_id),
     foreign key (u_id) references user(u_id),
     foreign key (rider) references rider(r_id),
