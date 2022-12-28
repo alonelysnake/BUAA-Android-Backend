@@ -87,4 +87,9 @@ public class ProviderController {
     public Response<Integer> getProviderNum() {
         return providerService.getProviderNum();
     }
+    
+    @RequestMapping(path = "/getPredicts/{id}")
+    public Response<List<HashMap<String, Object>>> getPredicts(@PathVariable String id) {
+        return providerService.getPredicts(id);
+    }
 }

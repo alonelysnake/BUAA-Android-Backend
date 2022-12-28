@@ -8,6 +8,7 @@ create table indent(
     cost double(8,2) not null ,
     state enum('NOT_PAY','PAID','NOT_ACCEPT','ACCEPTED','DELIVERING','FINISHED','CANCELED') not null,
     addr varchar(50) not null ,
+    o_comment varchar(100),
     u_id varchar(15) not null ,
     rider varchar(15),
     p_id varchar(15) not null ,

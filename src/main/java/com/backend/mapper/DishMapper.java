@@ -4,6 +4,7 @@ import com.backend.entity.Dish;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -80,5 +81,8 @@ public interface DishMapper {
 
     @Select("select * from dish")
     List<Dish> listAll();
+    
+    @Select("select d_id, name from dish where p_id = #{p_id}")
+    List<HashMap<String,Object>>listDishById(@Param("p_id")String pid);
 }
 

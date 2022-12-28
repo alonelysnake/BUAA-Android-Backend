@@ -20,15 +20,15 @@ if len(args) != 0:
             date = datetime.date(*map(int, args[i].split('-')))
             dates.append(date)
         else:
-            nums.append(i)
+            nums.append(int(args[i]))
 else:
-    for i in range(110):
+    for i in range(30):
         dates.append(datetime.date.today() + datetime.timedelta(days=i))
-        nums.append(random.randint(100, 200))
+        nums.append(random.randint(10, 110))
 
 dates = pd.DatetimeIndex(dates)
 data = pd.DataFrame({"nums": nums}, index=dates)
-
+# print(data)
 # 对数据进行差分（求相邻的Δ）后得到 自相关图和 偏相关图
 D_data = data.diff().dropna()
 D_data.columns = [u'销量差分']
@@ -36,9 +36,11 @@ D_data.columns = [u'销量差分']
 # 对模型进行定阶
 pmax = int(len(D_data) / 10)  # 一般阶数不超过 length /10
 qmax = int(len(D_data) / 10)
+pmax = max(pmax, 3)
+qmax = max(qmax, 3)
 pmax = min(3, pmax)
 qmax = min(3, qmax)
-print(pmax, qmax)
+# print(pmax, qmax)
 bic_matrix = []
 for p in range(pmax + 1):
     temp = []
@@ -51,17 +53,16 @@ for p in range(pmax + 1):
         bic_matrix.append(temp)
 
 bic_matrix = pd.DataFrame(bic_matrix)  # 将其转换成Dataframe 数据结构
-print(bic_matrix)
+# print(bic_matrix)
 p, q = bic_matrix.stack().idxmin()  # 先使用stack 展平， 然后使用 idxmin 找出最小值的位置
 
 # 建立ARIMA 模型
 
 model = ARIMA(data, (p, 1, q), freq='D').fit()
 
-predictions=model.forecast(5)
+predictions = model.forecast(1)
 pre_result = predictions[0]
-print(pre_result)
-
+print(pre_result[0])
 
 # model.summary2()
 # # 保存模型

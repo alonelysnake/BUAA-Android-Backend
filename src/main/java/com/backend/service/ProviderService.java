@@ -1,11 +1,13 @@
 package com.backend.service;
 
 import com.backend.entity.Indent;
+import com.backend.mapper.DishMapper;
 import com.backend.mapper.IndentMapper;
 import com.backend.utils.Response;
 import com.backend.entity.Provider;
 import com.backend.entity.User;
 import com.backend.mapper.ProviderMapper;
+import com.backend.utils.RunPython;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class ProviderService {
@@ -22,6 +25,8 @@ public class ProviderService {
     private ProviderMapper providerMapper;
     @Autowired
     private IndentMapper indentMapper;
+    @Autowired
+    private DishMapper dishMapper;
     
     //用户注册
     public Response<Provider> register(String id, String name, String password, int district) {
@@ -164,6 +169,54 @@ public class ProviderService {
                 costs.add(oneDay);
             }
             res.setData(costs);
+            res.setState(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setState(false);
+        }
+        return res;
+    }
+    
+    //返回所有菜的预测销量
+    public Response<List<HashMap<String, Object>>> getPredicts(@PathVariable String id) {
+        Response<List<HashMap<String, Object>>> res = new Response<>();
+        try {
+            List<HashMap<String, Object>> dishes = dishMapper.listDishById(id);
+            
+            for (HashMap<String, Object> dish : dishes) {
+                int d_id = (int) dish.get("d_id");
+                
+                LocalDateTime now = LocalDateTime.now();
+                StringBuilder args = new StringBuilder();
+                for (int i = 30; i > 0; i--) {
+                    LocalDateTime time1 = now.minusDays(i);
+                    LocalDateTime time2 = now.minusDays(i - 1);
+                    Integer num = indentMapper.getDishNumByDate(d_id, time1, time2);
+                    if (num == num) {
+                        num = 0;
+                    }
+                    args.append(time1.toLocalDate());
+                    args.append(" ");
+                    args.append(num);
+                    args.append(" ");
+                }
+                
+                args = new StringBuilder();
+                for (int i = 30; i > 0; i--) {
+                    LocalDateTime time1 = now.minusDays(i);
+                    Random random = new Random();
+                    int num = random.nextInt(100) + 10;
+                    
+                    args.append(time1.toLocalDate());
+                    args.append(" ");
+                    args.append(num);
+                    args.append(" ");
+                }
+                
+                int predict = RunPython.runSale("", "", args.toString());
+                dish.put("predict", predict);
+            }
+            res.setData(dishes);
             res.setState(true);
         } catch (Exception e) {
             e.printStackTrace();
