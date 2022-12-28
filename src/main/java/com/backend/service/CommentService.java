@@ -1,5 +1,6 @@
 package com.backend.service;
 
+import com.backend.entity.Feedback;
 import com.backend.utils.PageBean;
 import com.backend.utils.Response;
 import com.backend.entity.Comment;
@@ -29,14 +30,22 @@ public class CommentService {
         return res;
     }
 
-    public PageBean<Comment> findCommentByDish(Integer currentPage, Integer pageSize, int d_id) {
-        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-        PageHelper.startPage(currentPage, pageSize);
-
-        List<Comment> comments = commentMapper.getCommentsByDid(d_id);
-        int countNums = commentMapper.countCommentByDid(d_id);            //总记录数
-        PageBean<Comment> pageBean = new PageBean<>();
-        pageBean.setInfo(comments,currentPage,pageSize,countNums);
-        return pageBean;
+    public Response<List<Comment>> findCommentByDish(int d_id) {
+        Response<List<Comment>> res = new Response<>();
+        try {
+            List<Comment> comments = commentMapper.getCommentsByDid(d_id);
+            if (comments == null) {
+                res.setState(false);
+                res.setMsg("获取评论失败");
+            } else {
+                res.setState(true);
+                res.setData(comments);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
     }
 }

@@ -7,6 +7,8 @@ import com.backend.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/favor")
 public class FavorController {
@@ -30,9 +32,9 @@ public class FavorController {
     /**
      * 传入 当前页,页大小,用户id
      * */
-    @RequestMapping(value = "/pages/{curPage}/{pageSize}/{u_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/select/{u_id}",method = RequestMethod.GET)
     @ResponseBody
-    public PageBean<Favor> findFavorByProvider(@PathVariable int curPage, @PathVariable int pageSize, @PathVariable int u_id){
-        return service.findFavorByUser(curPage,pageSize,u_id);
+    public Response<List<Favor>> findFavorByProvider(@PathVariable int u_id){
+        return service.findFavorByUser(u_id);
     }
 }
