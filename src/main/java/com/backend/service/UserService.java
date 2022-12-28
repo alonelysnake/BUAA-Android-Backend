@@ -57,7 +57,26 @@ public class UserService {
         }
         return res;
     }
-    
+
+    public Response<User> updateUserInfo(User user) {
+        Response<User> res = new Response<>();
+        try {
+            int success = userMapper.updateInfo(user);
+            if (success == 0) {
+                res.setState(false);
+                res.setMsg("修改失败");
+            } else {
+                res.setState(true);
+                res.setData(user);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     //重置密码
     public Response<String> resetPassword(String id) {
         Response<String> res = new Response<>();

@@ -5,11 +5,10 @@ import com.backend.utils.Response;
 import com.backend.entity.User;
 import com.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("user")
@@ -54,6 +53,17 @@ public class UserController {
         System.out.println("调用user/getUserNum");
         return userServive.getUserNum();
     }
-    
+
+    @PostMapping(path = "/updateInfo/{uid}")
+    @ResponseBody
+    public Response<User> updateInfo(@PathVariable String uid, @RequestBody Map<String, Object> params) {
+        String name = (String) params.get("name");
+        String phone = (String) params.get("contact");
+        String address = (String) params.get("address");
+        // String email = (String) params.get("email");
+        String password = (String) params.get("u_pw");
+        User user = new User(uid,name,password,phone,address);
+        return userServive.updateUserInfo(user);
+    }
     //TODO 用户信息补全
 }

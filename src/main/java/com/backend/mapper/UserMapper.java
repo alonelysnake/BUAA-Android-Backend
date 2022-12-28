@@ -59,4 +59,7 @@ public interface UserMapper {
     // 返回贫困生待认证
     @Select("select * from user where poor_state = 'UNCERTAIN'")
     List<User> listUncertainPoor();
+
+    @Update("update user set u_name = #{u_name},u_pw = #{u_pw},phone = #{phone},address = #{address} where u_id = #{u_id}")
+    int updateInfo(User user);
 }

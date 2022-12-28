@@ -21,7 +21,15 @@ public class User {
         this.u_name = u_name;
         this.u_pw = u_pw;
     }
-    
+
+    public User(String u_id, String u_name, String u_pw, String phone, String address) {
+        this.u_id = u_id;
+        this.u_name = u_name;
+        this.u_pw = u_pw;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public String getId() {
         return u_id;
     }
