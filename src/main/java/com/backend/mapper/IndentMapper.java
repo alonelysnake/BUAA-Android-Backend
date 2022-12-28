@@ -11,7 +11,9 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Repository
@@ -26,8 +28,8 @@ public interface IndentMapper {
     @Delete("delete from indent where o_id = #{id}")
     int removeById(@Param("id") String id);
     
-    @Select("select * from indent where o_id = #{oid}")
-    Indent getIdentById(@Param("oid") int oid);
+    @Select("select addr, cost, o_comment, p_name from indent, provider where o_id = #{oid} and indent.p_id = provider.p_id")
+    Map<String, Object> getIdentById(@Param("oid") int oid);
     
     //按用户查询所有订单
     @Select("select * from indent where u_id = #{uid}")
@@ -56,4 +58,9 @@ public interface IndentMapper {
     //修改订单状态
     @Update("update indent set state = #{state} where o_id = #{id}")
     int updateState(@Param("id") int id, @Param("state") Indent.OrderState newState);
+    
+    @Select("select sum(sum) from dish, dishIndent, indent " +
+            "where dish.d_id = dishIndent.d_id and indent.o_id = dishIndent.o_id and " +
+            "dish.d_id=#{d_id} and o_time between #{time1} and #{time2}")
+    Integer getDishNumByDate(@Param("d_id")int d_id, @Param("time1")LocalDateTime time1,@Param("time2")LocalDateTime time2);
 }

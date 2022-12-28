@@ -48,14 +48,16 @@ public class IndentController {
     @RequestMapping(path = "/getInfo/{id}")
     public Response<Map<String, Object>> getInfo(@PathVariable int id) {
         Response<Map<String, Object>> res = new Response<>();
-        Response<Indent> indentResponse = indentService.getIndentInfo(id);
+        Response<Map<String, Object>> indentResponse = indentService.getIndentInfo(id);
         if (!indentResponse.getState()) {
             res.setState(false);
             res.setMsg("获取订单基本信息（除菜品外的）失败");
         } else {
             Map<String, Object> map = new HashMap<>();
-            map.put("info", indentResponse.getData());//info:基本信息 dishes:点的所有菜
-            //TODO DishIndentService调用方法
+            map.put("cost",indentResponse.getData().get("cost"));
+            map.put("o_comment",indentResponse.getData().get("o_comment"));
+            map.put("address",indentResponse.getData().get("addr"));
+            map.put("store",indentResponse.getData().get("p_name"));
             try {
                 List<DishIndent> dishIndents = dishIndentService.findByOid(id);
                 List<HashMap<String, Integer>> dishes = new ArrayList<>();

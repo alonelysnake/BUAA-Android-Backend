@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class IndentService {
@@ -173,8 +174,8 @@ public class IndentService {
         return res;
     }
     
-    public Response<Indent> getIndentInfo(int oid) {
-        Response<Indent> res = new Response<>();
+    public Response<Map<String, Object>> getIndentInfo(int oid) {
+        Response<Map<String, Object>> res = new Response<>();
         try {
             res.setData(indentMapper.getIdentById(oid));
             res.setState(true);
