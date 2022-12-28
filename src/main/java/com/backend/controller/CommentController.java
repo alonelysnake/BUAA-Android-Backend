@@ -7,6 +7,8 @@ import com.backend.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
@@ -14,12 +16,12 @@ public class CommentController {
     private CommentService commentService;
 
     /**
-     * 传入 当前页,页大小,菜品id
+     * 菜品id
      * */
-    @RequestMapping(value = "/pages/{curPage}/{pageSize}/{d_id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/select/{d_id}",method = RequestMethod.GET)
     @ResponseBody
-    public PageBean<Comment> findCommentByDish(@PathVariable int curPage,@PathVariable int pageSize,@PathVariable int d_id){
-        return commentService.findCommentByDish(curPage,pageSize,d_id);
+    public Response<List<Comment>> findCommentByDish(@PathVariable int d_id){
+        return commentService.findCommentByDish(d_id);
     }
 
     @PostMapping("/insert")

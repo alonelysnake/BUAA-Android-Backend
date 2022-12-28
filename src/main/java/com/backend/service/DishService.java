@@ -1,7 +1,6 @@
 package com.backend.service;
 
 import com.backend.entity.Dish;
-import com.backend.entity.Dish;
 import com.backend.mapper.DishMapper;
 import com.backend.utils.PageBean;
 import com.backend.utils.Response;
@@ -51,54 +50,99 @@ public class DishService {
         return res;
     }
 
-    public PageBean<Dish> findDishByProvider(Integer currentPage, Integer pageSize, int p_id) {
-        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-        PageHelper.startPage(currentPage, pageSize);
-        List<Dish> dishes = dishMapper.findByPid(p_id);
-        int countNums = dishMapper.countDishByPid(p_id);            //总记录数
-        PageBean<Dish> pageBean = new PageBean<>();
-        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
-        return pageBean;
+    public Response<List<Dish>> findDishByProvider(int p_id) {
+        Response<List<Dish>> res = new Response<>();
+        try {
+            List<Dish> dishes = dishMapper.findByPid(p_id);
+            if (dishes == null) {
+                res.setState(false);
+                res.setMsg("获取菜品失败");
+            } else {
+                res.setState(true);
+                res.setData(dishes);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
     }
 
-    public PageBean<Dish> findDishByName(Integer currentPage, Integer pageSize, String name) {
-        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-        PageHelper.startPage(currentPage, pageSize);
-        List<Dish> dishes = dishMapper.findByName(name);
-        int countNums = dishMapper.countDishByName(name);            //总记录数
-        PageBean<Dish> pageBean = new PageBean<>();
-        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
-        return pageBean;
+    public Response<List<Dish>> findDishByName(String name) {
+        Response<List<Dish>> res = new Response<>();
+        try {
+            List<Dish> dishes = dishMapper.findByName(name);
+            if (dishes == null) {
+                res.setState(false);
+                res.setMsg("获取菜品失败");
+            } else {
+                res.setState(true);
+                res.setData(dishes);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
     }
 
-    public PageBean<Dish> findDishByPrice(Integer currentPage, Integer pageSize, double from,double to) {
-        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-        PageHelper.startPage(currentPage, pageSize);
-        List<Dish> dishes = dishMapper.findByPrice(from,to);
-        int countNums = dishMapper.countDishByPrice(from,to);            //总记录数
-        PageBean<Dish> pageBean = new PageBean<>();
-        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
-        return pageBean;
+    public Response<List<Dish>> findDishByPrice(double from,double to) {
+        Response<List<Dish>> res = new Response<>();
+        try {
+            List<Dish> dishes = dishMapper.findByPrice(from,to);
+            if (dishes == null) {
+                res.setState(false);
+                res.setMsg("获取菜品失败");
+            } else {
+                res.setState(true);
+                res.setData(dishes);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
     }
 
-    public PageBean<Dish> findDishByLowestPrice(Integer currentPage, Integer pageSize, double to) {
-        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-        PageHelper.startPage(currentPage, pageSize);
-        List<Dish> dishes = dishMapper.findByLowestPrice(to);
-        int countNums = dishMapper.countDishByLowestPrice(to);            //总记录数
-        PageBean<Dish> pageBean = new PageBean<>();
-        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
-        return pageBean;
+    public Response<List<Dish>> findDishByLowestPrice(double from) {
+        Response<List<Dish>> res = new Response<>();
+        try {
+            List<Dish> dishes = dishMapper.findByLowestPrice(from);
+            if (dishes == null) {
+                res.setState(false);
+                res.setMsg("获取菜品失败");
+            } else {
+                res.setState(true);
+                res.setData(dishes);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
     }
 
-    public PageBean<Dish> findDishByHighestPrice(Integer currentPage, Integer pageSize, double to) {
-        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-        PageHelper.startPage(currentPage, pageSize);
-        List<Dish> dishes = dishMapper.findByHighestPrice(to);
-        int countNums = dishMapper.countDishByHighestPrice(to);            //总记录数
-        PageBean<Dish> pageBean = new PageBean<>();
-        pageBean.setInfo(dishes,currentPage,pageSize,countNums);
-        return pageBean;
+    public Response<List<Dish>> findDishByHighestPrice(double to) {
+        Response<List<Dish>> res = new Response<>();
+        try {
+            List<Dish> dishes = dishMapper.findByHighestPrice(to);
+            if (dishes == null) {
+                res.setState(false);
+                res.setMsg("获取菜品失败");
+            } else {
+                res.setState(true);
+                res.setData(dishes);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
     }
 
     public Response<Dish> updateDish(Dish dish) {

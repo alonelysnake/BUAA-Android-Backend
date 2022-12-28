@@ -4,7 +4,6 @@ import com.backend.entity.Favor;
 import com.backend.mapper.FavorMapper;
 import com.backend.utils.PageBean;
 import com.backend.utils.Response;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,12 +30,22 @@ public class FavorService {
         return res;
     }
 
-    public PageBean<Favor> findFavorByUser(Integer currentPage, Integer pageSize, int u_id) {
-        PageHelper.startPage(currentPage, pageSize);
-        List<Favor> favors = favorMapper.findByUid(u_id);
-        int countNums = favorMapper.countFavorByUid(u_id);            //总记录数
-        PageBean<Favor> pageBean = new PageBean<>();
-        pageBean.setInfo(favors,currentPage,pageSize,countNums);
-        return pageBean;
+    public Response<List<Favor>> findFavorByUser(int u_id) {
+        Response<List<Favor>> res = new Response<>();
+        try {
+            List<Favor> favors = favorMapper.findByUid(u_id);
+            if (favors == null) {
+                res.setState(false);
+                res.setMsg("获取收藏失败");
+            } else {
+                res.setState(true);
+                res.setData(favors);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
     }
 }
