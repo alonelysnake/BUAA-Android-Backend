@@ -231,4 +231,25 @@ public class ProviderService {
         res.setState(true);
         return res;
     }
+    
+    public Response<HashMap<String, Object>> getIncome(String id) {
+        Response<HashMap<String, Object>> res = new Response<>();
+        try {
+            Double income = providerMapper.getIncome(id);
+            HashMap<String, Object> map = new HashMap<>();
+            if (income == null) {
+                income = 0.0;
+            }
+            map.put("income", income);
+            Provider provider = providerMapper.getProviderById(id);
+            map.put("name", provider.getName());
+            res.setData(map);
+            res.setState(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setState(false);
+        }
+        System.out.println(res.getData());
+        return res;
+    }
 }

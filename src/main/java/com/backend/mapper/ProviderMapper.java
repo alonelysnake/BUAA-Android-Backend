@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -58,12 +59,16 @@ public interface ProviderMapper {
     
     //统计用户（根据用户id+密码）
     @Select("select count(*) from provider where p_id = #{pid} and p_pw = #{pwd}")
-    int countByIdAndPwd(@Param("pid")String pid,@Param("pwd")String password);
+    int countByIdAndPwd(@Param("pid") String pid, @Param("pwd") String password);
     
     //统计用户（根据用户name+密码）
     @Select("select count(*) from provider where p_name = #{name} and p_pw = #{pwd}")
-    int countByNameAndPwd(@Param("name")String name, @Param("pwd")String password);
+    int countByNameAndPwd(@Param("name") String name, @Param("pwd") String password);
     
     @Update("update provider set p_name=#{name} and p_pw=#{pw} and phone={phone} where p_id=#{id}")
     int updateInfo(@Param("id") String id, @Param("name") String name, @Param("phone") String phone, @Param("pw") String password);
+    
+    @Select("select sum(cost) as income from indent where p_id=#{id} " +
+            "group by indent.p_id")
+    Double getIncome(@Param("id") String id);
 }

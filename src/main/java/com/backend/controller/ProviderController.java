@@ -101,4 +101,9 @@ public class ProviderController {
                                         @PathVariable String pwd) {
         return providerService.changeInfo(id, name, phone, address, pwd);
     }
+    
+    @RequestMapping(path = "/getIncomeSum/{id}")
+    public Response<HashMap<String, Object>> getIncomeSum(@PathVariable String id) {
+        return providerService.getIncome(id);
+    }
 }

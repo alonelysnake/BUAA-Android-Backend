@@ -78,6 +78,7 @@ public interface IndentMapper {
     
     @Select("select sum(sum) from dish, dishIndent, indent " +
             "where dish.d_id = dishIndent.d_id and indent.o_id = dishIndent.o_id and " +
-            "dish.d_id=#{d_id} and o_time between #{time1} and #{time2}")
+            "dish.d_id=#{d_id} and o_time between #{time1} and #{time2} " +
+            "group by dish.d_id")
     Integer getDishNumByDate(@Param("d_id")int d_id, @Param("time1")LocalDateTime time1,@Param("time2")LocalDateTime time2);
 }
