@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface DishMapper {
     // 新增菜品
-    @Insert("insert into dish values(#{p_id},#{name},#{curPrice},#{price},#{sale},#{d_likes},#{d_dislikes},#{imgUrl},#{isHot},#{isTop},#{ingredient},#{isOver},#{pinyin})")
+    @Insert("insert into dish values(#{d_id},#{p_id},#{name},#{curPrice},#{price},#{sale},#{d_likes},#{d_dislikes},#{imgUrl},#{isHot},#{isTop},#{ingredient},#{isOver},#{pinyin})")
     @Options(useGeneratedKeys = true, keyProperty = "d_id", keyColumn = "d_id")
     int insert(Dish dish);
 
