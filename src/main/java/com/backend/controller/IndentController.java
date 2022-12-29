@@ -47,6 +47,7 @@ public class IndentController {
     //TODO 查看单个订单的详细信息（统一Response?）
     @RequestMapping(path = "/getInfo/{id}")
     public Response<Map<String, Object>> getInfo(@PathVariable int id) {
+        System.out.println("indent/getInfo");
         Response<Map<String, Object>> res = new Response<>();
         Response<Map<String, Object>> indentResponse = indentService.getIndentInfo(id);
         if (!indentResponse.getState()) {

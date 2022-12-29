@@ -1,6 +1,3 @@
-SET FOREIGN_KEY_CHECKS=0;
-
-drop table if exists dish;
 
 create table dish(
     d_id int not null auto_increment,
@@ -17,6 +14,6 @@ create table dish(
     ingredient varchar(1024),
     isOver boolean not null ,
     pinyin varchar(512) not null ,
-    primary key (d_id),
-    foreign key (p_id) references provider(p_id)
+    primary key (d_id)
+#     foreign key (p_id) references provider(p_id)
 )default charset=utf8;

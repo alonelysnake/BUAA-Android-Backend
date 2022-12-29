@@ -19,11 +19,16 @@ import java.util.Map;
 @Repository
 public interface IndentMapper {
     // 新增订单
-    @Insert("insert into indent(o_time, cost, state, address, u_id, rider, p_id,o_comment) " +
-            "values (#{o_time}, #{cost}, #{state}, #{address}, #{u_id}, #{rider}, #{p_id}, #{o_comment})")
+//    @Insert("insert into indent(o_time, cost, state, address, u_id, rider, p_id,o_comment) " +
+//            "values (#{o_time}, #{cost}, #{state}, #{address}, #{u_id}, #{rider}, #{p_id}, #{o_comment})")
+//    @Options(useGeneratedKeys = true, keyProperty = "o_id", keyColumn = "o_id")
+//    int insert(Indent indent);
+
+    @Insert("insert into indent " +
+            "values (#{o_id},#{o_time}, #{send_time},#{cost}, #{state}, #{address},#{o_comment}, #{u_id}, #{rider}, #{p_id}, #{d_id})")
     @Options(useGeneratedKeys = true, keyProperty = "o_id", keyColumn = "o_id")
     int insert(Indent indent);
-    
+
     //按照订单id删除订单
     @Delete("delete from indent where o_id = #{id}")
     int removeById(@Param("id") String id);
