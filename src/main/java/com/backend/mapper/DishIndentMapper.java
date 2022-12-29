@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Repository
@@ -19,4 +21,7 @@ public interface DishIndentMapper {
     //查询订单对应菜品id
     @Select("select * from dishIndent where o_id=#{o_id}")
     List<DishIndent> findByOid(@Param("o_id")int oid);
+    
+    @Select("select name, sum from dish, dishIndent where o_id=#{o_id} and dishIndent.d_id=#{dish.d_id}")
+    List<Map<String,Object>> findNameCostByOid(@Param("o_id")int oid);
 }

@@ -54,17 +54,17 @@ public class IndentController {
             res.setMsg("获取订单基本信息（除菜品外的）失败");
         } else {
             Map<String, Object> map = new HashMap<>();
-            map.put("cost",indentResponse.getData().get("cost"));
-            map.put("o_comment",indentResponse.getData().get("o_comment"));
-            map.put("address",indentResponse.getData().get("addr"));
-            map.put("store",indentResponse.getData().get("p_name"));
+            map.put("cost", indentResponse.getData().get("cost"));
+            map.put("o_comment", indentResponse.getData().get("o_comment"));
+            map.put("address", indentResponse.getData().get("addr"));
+            map.put("store", indentResponse.getData().get("p_name"));
             try {
-                List<DishIndent> dishIndents = dishIndentService.findByOid(id);
-                List<HashMap<String, Integer>> dishes = new ArrayList<>();
-                for (DishIndent dishIndent : dishIndents) {
-                    HashMap<String, Integer> dish = new HashMap<>();
-                    dish.put("dish_id", dishIndent.getDishId());
-                    dish.put("num", dishIndent.getSum());
+                List<Map<String, Object>> dishIndents = dishIndentService.findNameCostByOid(id);
+                List<HashMap<String, Object>> dishes = new ArrayList<>();
+                for (Map<String, Object> dishIndent : dishIndents) {
+                    HashMap<String, Object> dish = new HashMap<>();
+                    dish.put("name", dishIndent.get("name"));
+                    dish.put("num", dishIndent.get("sum"));
                     dishes.add(dish);
                 }
                 map.put("dishes", dishes);//所有菜品信息list，包含{dish_id:菜的id,num:点的数量}
@@ -83,26 +83,26 @@ public class IndentController {
 //        LocalDateTime time = (LocalDateTime) params.get("time");
         LocalDateTime time = LocalDateTime.now();
         //TODO 得到其他参数
-        double cost = (double) params.get("");
-        String address = (String) params.get("");
-        int uid = (int) params.get("");
-        int rider = (int) params.get("");
-        int pid = (int) params.get("");
-        String comment = (String) params.get("");
+        double cost = (double) params.get("");//订单总价
+        String address = (String) params.get("");//配送地址
+        String uid = (String) params.get("");//当前用户id
+        String rider = (String) params.get("");//指派的骑手id（可以为空）
+        String pid = (String) params.get("");//店铺id
+        String comment = (String) params.get("");//备注
+        Map<Integer, Integer> dishes = (Map<Integer, Integer>) params.get("");//所有菜的 id-个数
+        
         Indent indent = new Indent(time, cost, address, uid, rider, pid, comment);
         
         //添加订单
         indentService.addIndent(indent);
         
-        //所有菜的id和个数
-        Map<Integer, Integer> dishes = (Map<Integer, Integer>) params.get("");
-        //TODO 调用Dish中的方法增加订购数
         for (Integer dishId : dishes.keySet()) {
             int dishNum = dishes.get(dishId);
             DishIndent newDishIndent = new DishIndent(indent.getId(), dishId, dishNum);
+            //记录订单 菜对应关系
             dishIndentService.insertDish(newDishIndent);
-            //TODO 增加订购数？
-            //dishService
+            //增加菜的销量
+            dishService.updateDishSales(dishId, dishNum);
         }
         
         Response<String> res = new Response<>();
