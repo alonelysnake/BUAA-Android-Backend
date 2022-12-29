@@ -12,11 +12,15 @@ import java.util.List;
 public interface DishMapper {
     // 新增菜品
     @Insert("insert into dish values(#{p_id},#{name},#{curPrice},#{price},#{sale},#{d_likes},#{d_dislikes},#{imgUrl},#{isHot},#{isTop},#{ingredient},#{isOver},#{pinyin})")
-    @Options(useGeneratedKeys = true,keyProperty = "d_id",keyColumn = "d_id")
+    @Options(useGeneratedKeys = true, keyProperty = "d_id", keyColumn = "d_id")
     int insert(Dish dish);
 
     @Update("update dish set name = #{name},curPrice = #{curPrice},price = #{price},imgUrl = #{imgUrl},isHot = #{isHot},isTop = #{isTop},ingredient = #{ingredient},isOver = #{isOver} where d_id = #{d_id}")
     int updateDish(Dish dish);
+
+    //修改销量
+    @Update("update dish set sale = sale+#{num} where d_id = #{d_id}")
+    int updateDishSale(@Param("d_id") int id, @Param("num") int num);
 
     // 删除菜品
     @Delete("delete from dish where d_id=#{d_id}")

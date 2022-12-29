@@ -19,12 +19,12 @@ public class Indent {
     private double cost;
     private OrderState state=OrderState.PAID;
     private String address;//送货地址
-    private int u_id;
-    private Integer rider;
-    private int p_id;
+    private String u_id;
+    private String rider;
+    private String p_id;
     private String o_comment;//备注
 
-    public Indent(LocalDateTime o_time, double cost, String address, int u_id, Integer rider, int p_id,String o_comment) {
+    public Indent(LocalDateTime o_time, double cost, String address, String u_id, String rider, String p_id,String o_comment) {
         this.o_time = o_time;
         this.cost = cost;
         this.address = address;
@@ -58,15 +58,15 @@ public class Indent {
         return address;
     }
     
-    public int getUser() {
+    public String getUser() {
         return u_id;
     }
     
-    public Integer getRider() {
+    public String getRider() {
         return rider;
     }
     
-    public int getProvider() {
+    public String getProvider() {
         return p_id;
     }
 }
