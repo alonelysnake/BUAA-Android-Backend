@@ -109,11 +109,16 @@ public class UserService {
     }
     
     // 根据用户id得到用户个人信息
-    public Response<User> getInfoById(String id) {
-        Response<User> res = new Response<>();
+    public Response<HashMap<String, Object>> getInfoById(String id) {
+        Response<HashMap<String, Object>> res = new Response<>();
         try {
             User user = userMapper.getUserById(id);
-            res.setData(user);
+            HashMap<String, Object> map=new HashMap<>();
+            map.put("name",user.getName());
+            map.put("contact",user.getPhone());
+            map.put("address",user.getAddress());
+            map.put("password",user.getPassword());
+            res.setData(map);
             res.setState(true);
         } catch (Exception e) {
             res.setState(false);

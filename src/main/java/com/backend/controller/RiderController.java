@@ -43,7 +43,7 @@ public class RiderController {
     
     //修改骑手信息
     @RequestMapping(path = "/changeInfo/{userName}/{contact}/{password}/{realName}/{stuId}/{school}")
-    public Response<Boolean> getInfo(@PathVariable String contact,
+    public Response<Boolean> changeInfo(@PathVariable String contact,
                                      @PathVariable String password,
                                      @PathVariable String realName,
                                      @PathVariable String school,

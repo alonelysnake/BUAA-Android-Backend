@@ -98,7 +98,7 @@ public class ProviderController {
                                         @PathVariable String name,
                                         @PathVariable String phone,
                                         @PathVariable String address,
-                                        @PathVariable String password) {
-        return providerService.changeInfo(id, name, phone, address, password);
+                                        @PathVariable String pwd) {
+        return providerService.changeInfo(id, name, phone, address, pwd);
     }
 }

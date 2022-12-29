@@ -7,6 +7,7 @@ import com.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,11 +37,11 @@ public class UserController {
         return userServive.resetPassword(id);
     }
     
-    //TODO 未完成，用户详细信息查询
-//    @RequestMapping(path = "/getInfo/{id}")
-//    public Response<User> getInfo(@PathVariable String id) {
-//        return userServive.getInfoById(id);
-//    }
+    // 用户详细信息查询
+    @RequestMapping(path = "/getInfo/{id}")
+    public Response<HashMap<String, Object>> getInfo(@PathVariable String id) {
+        return userServive.getInfoById(id);
+    }
     
     // 添加好友
     @RequestMapping(path = "/getInfo/{uid}/{fid}")
