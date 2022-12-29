@@ -63,4 +63,7 @@ public interface ProviderMapper {
     //统计用户（根据用户name+密码）
     @Select("select count(*) from provider where p_name = #{name} and p_pw = #{pwd}")
     int countByNameAndPwd(@Param("name")String name, @Param("pwd")String password);
+    
+    @Update("update provider set p_name=#{name} and p_pw=#{pw} and phone={phone} where p_id=#{id}")
+    int updateInfo(@Param("id") String id, @Param("name") String name, @Param("phone") String phone, @Param("pw") String password);
 }

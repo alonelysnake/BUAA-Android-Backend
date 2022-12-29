@@ -3,6 +3,7 @@ package com.backend.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 public class RunPython {
     //运行python文件
@@ -11,7 +12,8 @@ public class RunPython {
         filePath = "E:/coding/JAVA/demo/machine_learning/sales/arima.py";//py文件地址
         //args为传递的参数，按照 日期（精确到日） 数量 表示
         Process proc;
-        int res = 0;
+        Random random = new Random();
+        int res = random.nextInt(100) + 10;
         try {
             //TODO python.exe路径+要运行的py文件路径+参数
             proc = Runtime.getRuntime().exec(envPath + " " + filePath + " " + args);// 执行py文件

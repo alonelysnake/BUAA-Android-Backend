@@ -44,6 +44,18 @@ public interface IndentMapper {
     @Select("select * from indent where u_id = #{uid} and state = #{state}")
     List<Indent> listByUserAndState(@Param("uid") String uid, @Param("state") Indent.OrderState state);
     
+    //按骑手和订单状态查询所有订单
+//    @Select("select d_name, o_id, state, o_time from indent, district, provider where r_id = #{rid} and state = #{state} and d_id=#{d_id} and provider.p_id=indent.p_id")
+//    List<HashMap<String,Object>> listByRiderAndState(@Param("rid") String rid, @Param("state") Indent.OrderState state);
+    
+    //按骑手和订单状态查询所有订单
+    @Select("select d_name, o_id, o_time from indent, district, provider where r_id = #{rid} and state = #{state} and d_id=#{d_id} and provider.p_id=indent.p_id")
+    List<HashMap<String,Object>> listByRiderStateDistrict(@Param("rid") String rid, @Param("state") Indent.OrderState state,@Param("d_id")int d_id);
+    
+    //按订单状态查询所有订单
+    @Select("select * from indent where r_id = #{rid} and state = #{state}")
+    List<Indent> listByState(@Param("rid") String rid, @Param("state") Indent.OrderState state);
+    
     //按骑手查询所有订单
     @Select("select * from indent where rider = #{rid}")
     List<Indent> listByRider(@Param("rid") String rider);

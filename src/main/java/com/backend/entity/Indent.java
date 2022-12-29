@@ -25,7 +25,10 @@ public class Indent {
     private String o_comment;//备注
     private int d_id;
 
-    public Indent(LocalDateTime o_time, double cost, String address, String u_id, String rider, String p_id,String o_comment) {
+    public Indent() {
+    }
+
+    public Indent(LocalDateTime o_time, double cost, String address, String u_id, String rider, String p_id, String o_comment) {
         this.o_time = o_time;
         this.cost = cost;
         this.address = address;

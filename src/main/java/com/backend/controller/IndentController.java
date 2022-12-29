@@ -44,6 +44,11 @@ public class IndentController {
         return indentService.getUserIndents(id, Indent.OrderState.valueOf(state.toUpperCase()));
     }
     
+//    @RequestMapping(path = "/getRiderIndent/{id}/{d_id}")
+//    public Response<Map<String, List<HashMap<String, Object>>>> getRiderIndent(@PathVariable String id, @PathVariable int d_id) {
+//        return indentService.getRiderIndent(id, d_id);
+//    }
+    
     //TODO 查看单个订单的详细信息（统一Response?）
     @RequestMapping(path = "/getInfo/{id}")
     public Response<Map<String, Object>> getInfo(@PathVariable int id) {
@@ -69,6 +74,8 @@ public class IndentController {
                     dishes.add(dish);
                 }
                 map.put("dishes", dishes);//所有菜品信息list，包含{dish_id:菜的id,num:点的数量}
+                res.setState(true);
+                res.setData(map);
             } catch (Exception e) {
                 res.setState(false);
                 res.setMsg("获取订单菜品信息失败");

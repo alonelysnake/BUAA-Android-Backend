@@ -9,6 +9,9 @@ public class Rider {
     private String school;
     private boolean rider_state = false;
     
+    public Rider() {
+    }
+    
     public int getId() {
         return r_id;
     }
