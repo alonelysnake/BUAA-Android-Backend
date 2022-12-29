@@ -224,4 +224,11 @@ public class ProviderService {
         }
         return res;
     }
+    
+    public Response<Boolean> changeInfo(String id, String name, String phone, String address, String password) {
+        Response<Boolean> res = new Response<>();
+        providerMapper.updateInfo(id, name, phone, password);
+        res.setState(true);
+        return res;
+    }
 }

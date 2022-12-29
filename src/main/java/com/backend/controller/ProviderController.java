@@ -92,4 +92,13 @@ public class ProviderController {
     public Response<List<HashMap<String, Object>>> getPredicts(@PathVariable String id) {
         return providerService.getPredicts(id);
     }
+    
+    @RequestMapping(path = "/changeInfo/{id}/{name}/{phone}/{address}/{pwd}")
+    public Response<Boolean> changeInfo(@PathVariable String id,
+                                        @PathVariable String name,
+                                        @PathVariable String phone,
+                                        @PathVariable String address,
+                                        @PathVariable String password) {
+        return providerService.changeInfo(id, name, phone, address, password);
+    }
 }
