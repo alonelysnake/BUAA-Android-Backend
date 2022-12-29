@@ -68,6 +68,8 @@ public class IndentController {
                     dishes.add(dish);
                 }
                 map.put("dishes", dishes);//所有菜品信息list，包含{dish_id:菜的id,num:点的数量}
+                res.setState(true);
+                res.setData(map);
             } catch (Exception e) {
                 res.setState(false);
                 res.setMsg("获取订单菜品信息失败");
