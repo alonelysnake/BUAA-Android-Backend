@@ -20,10 +20,12 @@ public class RiderController {
     private RiderService riderService;
     
     //TODO 创建骑手（待认证）
-//    @ResponseBody
-//    public Response<Boolean> register(@PathVariable String id, @PathVariable String name, @PathVariable String password) {
-//        return userServive.register(id, name, password);
-//    }
+    @RequestMapping(path = "/register/{id}/{password}")
+    @ResponseBody
+    public Response<Boolean> register(@PathVariable String id, @PathVariable String password) {
+        String name = "rider"+id;
+        return riderService.register(id, name, password);
+    }
     
     @RequestMapping(path = "/login/{id}/{password}", method = RequestMethod.GET)
     @ResponseBody
