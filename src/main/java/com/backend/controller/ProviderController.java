@@ -23,14 +23,14 @@ public class ProviderController {
     /**
      * 商家注册
      *
-     * @param name
      * @param password
-     * @param district_id
      * @return 注册成功的商家实体类
      */
-    @RequestMapping(path = "/register/{id}/{name}/{password}/{district_id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/register/{id}/{password}/", method = RequestMethod.GET)
     @ResponseBody
-    public Response<Provider> register(@PathVariable String id, @PathVariable String name, @PathVariable String password, @PathVariable int district_id) {
+    public Response<Provider> register(@PathVariable String id, @PathVariable String password) {
+        String name = "商家" + id;
+        int district_id = 1;
         return providerService.register(id, name, password, district_id);
     }
     
@@ -41,7 +41,7 @@ public class ProviderController {
      * @param password
      * @return 登录成功的商家实体类
      */
-    @RequestMapping(path = "/login/{name}/{password}", method = RequestMethod.GET)
+    @RequestMapping(path = "/login/{id}/{password}", method = RequestMethod.GET)
     @ResponseBody
     public Response<Provider> login(@PathVariable String id, @PathVariable String password) {
         return providerService.login(id, password);

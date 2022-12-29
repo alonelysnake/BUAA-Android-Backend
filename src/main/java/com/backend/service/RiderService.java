@@ -15,6 +15,25 @@ public class RiderService {
     @Autowired
     private RiderMapper riderMapper;
     
+    public Response<Boolean> register(String id, String name, String password) {
+        Response<Boolean> res = new Response<>();
+        try {
+            int success = riderMapper.insert(id, name, password);
+            if (success == 0) {
+                res.setState(false);
+                res.setMsg("用户名不存在或密码错误");
+            } else {
+                res.setState(true);
+                res.setData(true);
+            }
+        } catch (Exception e) {
+            res.setState(false);
+            res.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
     public Response<Boolean> login(String id, String password) {
         Response<Boolean> res = new Response<>();
         try {

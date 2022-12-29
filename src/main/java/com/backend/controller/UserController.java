@@ -18,9 +18,10 @@ public class UserController {
     @Autowired
     private FriendService friendService;
     
-    @RequestMapping(path = "/register/{id}/{name}/{password}", method = RequestMethod.GET)
+    @RequestMapping(path = "/register/{id}/{password}", method = RequestMethod.GET)
     @ResponseBody
-    public Response<User> register(@PathVariable String id, @PathVariable String name, @PathVariable String password) {
+    public Response<User> register(@PathVariable String id, @PathVariable String password) {
+        String name = "user" + id;
         return userServive.register(id, name, password);
     }
     
@@ -53,7 +54,7 @@ public class UserController {
         System.out.println("调用user/getUserNum");
         return userServive.getUserNum();
     }
-
+    
     @PostMapping(path = "/updateInfo/{uid}")
     @ResponseBody
     public Response<User> updateInfo(@PathVariable String uid, @RequestBody Map<String, Object> params) {
@@ -62,7 +63,7 @@ public class UserController {
         String address = (String) params.get("address");
         // String email = (String) params.get("email");
         String password = (String) params.get("u_pw");
-        User user = new User(uid,name,password,phone,address);
+        User user = new User(uid, name, password, phone, address);
         return userServive.updateUserInfo(user);
     }
     //TODO 用户信息补全

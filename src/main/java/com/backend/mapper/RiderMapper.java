@@ -2,6 +2,7 @@ package com.backend.mapper;
 
 import com.backend.entity.Rider;
 import com.backend.entity.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -13,6 +14,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface RiderMapper {
+    @Insert("insert into rider(r_id, r_name, r_pw) values(#{id},#{name},#{pwd})")
+    int insert(@Param("id")String id,@Param("name")String name,@Param("pwd")String pwd);
     
     //根据id查找用户
     @Select("select * from rider where r_id = #{id}")
