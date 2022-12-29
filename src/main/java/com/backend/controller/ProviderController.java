@@ -98,8 +98,13 @@ public class ProviderController {
                                         @PathVariable String name,
                                         @PathVariable String phone,
                                         @PathVariable String address,
-                                        @PathVariable String password) {
-        return providerService.changeInfo(id, name, phone, address, password);
+                                        @PathVariable String pwd) {
+        return providerService.changeInfo(id, name, phone, address, pwd);
+    }
+    
+    @RequestMapping(path = "/getIncomeSum/{id}")
+    public Response<HashMap<String, Object>> getIncomeSum(@PathVariable String id) {
+        return providerService.getIncome(id);
     }
 
     @RequestMapping(path = "/getProviders")

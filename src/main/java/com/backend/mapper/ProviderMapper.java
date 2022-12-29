@@ -17,7 +17,7 @@ import java.util.List;
 public interface ProviderMapper {
     //新增用户
     @Insert("insert into provider(p_name, p_pw, scores, scorers, d_id)" +
-            "values(#{name}, #{p_pw}, 0, 0, #{d_id})")
+            "values(#{name}, #{pwd}, 0, 0, #{d_id})")
 //    @Options(useGeneratedKeys = true, keyProperty = "p_id", keyColumn = "p_id")
     int insert(Provider provider);
 
@@ -67,13 +67,17 @@ public interface ProviderMapper {
     
     //统计用户（根据用户name+密码）
     @Select("select count(*) from provider where p_name = #{name} and p_pw = #{pwd}")
-    int countByNameAndPwd(@Param("name")String name, @Param("pwd")String password);
+    int countByNameAndPwd(@Param("name") String name, @Param("pwd") String password);
 
     @Select("select p_id from provider where d_id = #{d_id}")
     List<Integer> getProviderByDid(@Param("d_id") int d_id);
 
     @Update("update provider set p_name=#{name} and p_pw=#{pw} and phone={phone} where p_id=#{id}")
     int updateInfo(@Param("id") String id, @Param("name") String name, @Param("phone") String phone, @Param("pw") String password);
+
+    @Select("select sum(cost) as income from indent where p_id=#{id} " +
+            "group by indent.p_id")
+    Double getIncome(@Param("id") String id);
 
     @Select("select * from provider")
     List<Provider> getProviders();

@@ -109,17 +109,24 @@ public class UserService {
     }
     
     // 根据用户id得到用户个人信息
-    public Response<User> getInfoById(String id) {
-        Response<User> res = new Response<>();
+    public Response<HashMap<String, Object>> getInfoById(String id) {
+        Response<HashMap<String, Object>> res = new Response<>();
         try {
+            System.out.println(id);
             User user = userMapper.getUserById(id);
-            res.setData(user);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", user.getName());
+            map.put("contact", user.getPhone());
+            map.put("address", user.getAddress());
+            map.put("password", user.getPassword());
+            res.setData(map);
             res.setState(true);
         } catch (Exception e) {
             res.setState(false);
             res.setMsg(e.getMessage());
             e.printStackTrace();
         }
+        System.out.println(res.getData());
         return res;
     }
     
@@ -136,33 +143,4 @@ public class UserService {
         res.setData(userMapper.listUncertainPoor());
         return res;
     }
-
-//    public Response<Map<String, Object>> getRiderInfo(int id) {
-//        Response<Map<String, Object>> res = new Response<>();
-//        try {
-//            User rider = userMapper.getUserById(id);
-//            HashMap<String, Object> data = new HashMap<>();
-//            data.put("userName", rider.getName());
-//            data.put("contact", rider.getContact());
-//            data.put("accoutName", rider.getAccoutName());
-//            data.put("password", rider.getPassword());
-//            data.put("realName", rider.getRealName());
-//            data.put("stuId", rider.getStuId());
-//            data.put("school", rider.getSchool());
-//            res.setState(true);
-//            res.setData(data);
-//        } catch (Exception e) {
-//            res.setState(false);
-//            res.setMsg(e.getMessage());
-//            e.printStackTrace();
-//        }
-//        return res;
-//    }
-
-//    public Response<Boolean> changeRiderInfo(String accountName, String contact, String password, String realName, String school, String stuId, String userName) {
-//        int success = userMapper.updateById(accountName, contact, password, realName, school, stuId, userName);
-//        Response<Boolean> res = new Response<>();
-//        res.setInfo(success, "修改成功", "修改失败", success == 1);
-//        return res;
-//    }
 }

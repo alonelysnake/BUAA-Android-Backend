@@ -25,8 +25,8 @@ public interface RiderMapper {
     Rider getByIdAndPassword(@Param("id") String id, @Param("pwd")String pwd);
     
     //TODO 修改骑手个人信息（哪个参数是主键?）
-    @Update("update rider set contact=#{contact},u_pw=#{pwd}," +
-            "real_name=#{real_name},school=#{school}, r_name=#{r_name} where r_id=#{stu_id}")
+    @Update("update rider set contact=#{contact},r_pw=#{pwd}," +
+            "real_name=#{real_name},school=#{school}, r_name=#{r_name} where r_id=#{r_id}")
     int updateById(@Param("contact")String contact,
                    @Param("pwd")String password,
                    @Param("real_name")String realName,

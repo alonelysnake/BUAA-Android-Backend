@@ -7,6 +7,7 @@ import com.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,11 +37,12 @@ public class UserController {
         return userServive.resetPassword(id);
     }
     
-    //TODO 未完成，用户详细信息查询
-//    @RequestMapping(path = "/getInfo/{id}")
-//    public Response<User> getInfo(@PathVariable String id) {
-//        return userServive.getInfoById(id);
-//    }
+    // 用户详细信息查询
+    @RequestMapping(path = "/getInfo/{id}")
+    public Response<HashMap<String, Object>> getInfo(@PathVariable String id) {
+        System.out.println(id);
+        return userServive.getInfoById(id);
+    }
     
     // 添加好友
     @RequestMapping(path = "/getInfo/{uid}/{fid}")
@@ -55,16 +57,15 @@ public class UserController {
         return userServive.getUserNum();
     }
     
-    @PostMapping(path = "/updateInfo/{uid}")
+    @PostMapping(path = "/updateInfo")
     @ResponseBody
-    public Response<User> updateInfo(@PathVariable String uid, @RequestBody Map<String, Object> params) {
+    public Response<User> updateInfo(@RequestBody Map<String, Object> params) {
+        String uid = (String) params.get("id");
         String name = (String) params.get("name");
         String phone = (String) params.get("contact");
         String address = (String) params.get("address");
-        // String email = (String) params.get("email");
-        String password = (String) params.get("u_pw");
+        String password = (String) params.get("password");
         User user = new User(uid, name, password, phone, address);
         return userServive.updateUserInfo(user);
     }
-    //TODO 用户信息补全
 }
