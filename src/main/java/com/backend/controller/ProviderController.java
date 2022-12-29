@@ -26,7 +26,7 @@ public class ProviderController {
      * @param password
      * @return 注册成功的商家实体类
      */
-    @RequestMapping(path = "/register/{id}//{password}/", method = RequestMethod.GET)
+    @RequestMapping(path = "/register/{id}/{password}/", method = RequestMethod.GET)
     @ResponseBody
     public Response<Provider> register(@PathVariable String id, @PathVariable String password) {
         String name = "商家" + id;

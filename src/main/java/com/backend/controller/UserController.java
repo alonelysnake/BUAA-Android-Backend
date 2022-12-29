@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private FriendService friendService;
     
-    @RequestMapping(path = "/register/{id}//{password}", method = RequestMethod.GET)
+    @RequestMapping(path = "/register/{id}/{password}", method = RequestMethod.GET)
     @ResponseBody
     public Response<User> register(@PathVariable String id, @PathVariable String password) {
         String name = "user" + id;
