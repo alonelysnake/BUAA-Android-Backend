@@ -44,6 +44,11 @@ public class IndentController {
         return indentService.getUserIndents(id, Indent.OrderState.valueOf(state.toUpperCase()));
     }
     
+//    @RequestMapping(path = "/getRiderIndent/{id}/{d_id}")
+//    public Response<Map<String, List<HashMap<String, Object>>>> getRiderIndent(@PathVariable String id, @PathVariable int d_id) {
+//        return indentService.getRiderIndent(id, d_id);
+//    }
+    
     //TODO 查看单个订单的详细信息（统一Response?）
     @RequestMapping(path = "/getInfo/{id}")
     public Response<Map<String, Object>> getInfo(@PathVariable int id) {

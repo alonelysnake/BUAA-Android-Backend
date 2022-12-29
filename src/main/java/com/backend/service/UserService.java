@@ -40,6 +40,8 @@ public class UserService {
     
     //用户登录
     public Response<User> login(String id, String password) {
+        System.out.println(id);
+        System.out.println(password);
         Response<User> res = new Response<>();
         try {
             int success = userMapper.countByIdAndPwd(id, password);
@@ -57,7 +59,7 @@ public class UserService {
         }
         return res;
     }
-
+    
     public Response<User> updateUserInfo(User user) {
         Response<User> res = new Response<>();
         try {
@@ -76,7 +78,7 @@ public class UserService {
         }
         return res;
     }
-
+    
     //重置密码
     public Response<String> resetPassword(String id) {
         Response<String> res = new Response<>();

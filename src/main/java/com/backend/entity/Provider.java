@@ -11,6 +11,10 @@ public class Provider {
     private String phone;//商家联系电话
     //TODO 详细信息
     
+    
+    public Provider() {
+    }
+    
     public Provider(String id, String p_name, String p_pw, int d_id) {
         this.p_id = id;
         this.p_name = p_name;

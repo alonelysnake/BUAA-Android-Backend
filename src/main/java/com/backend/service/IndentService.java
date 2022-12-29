@@ -5,7 +5,9 @@ import com.backend.entity.Indent;
 import com.backend.mapper.IndentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +95,17 @@ public class IndentService {
         }
         return res;
     }
+    
+//    public Response<Map<String, List<HashMap<String, Object>>>> getRiderIndent(String id, int d_id) {
+//        Response<Map<String, List<HashMap<String, Object>>>> res=new Response<>();
+//        try {
+//            Map<String, List<HashMap<String, Object>>> indentMap=new HashMap<>();
+//            Indent.OrderState state= Indent.OrderState.ACCEPTED;
+//            indentMap.put(state.name(),indentMapper)
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
     
     //获取商家所有订单
     public Response<List<Indent>> getProviderIndents(String pid) {

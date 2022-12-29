@@ -2,9 +2,18 @@ package com.backend.entity;
 
 public class User {
     public enum RiderState {
-        NO,
-        UNCERTAIN,
-        YES
+        NO(0),
+        UNCERTAIN(1),
+        YES(2);
+        
+        public int num;
+        
+        RiderState() {
+        }
+        
+        RiderState(int num) {
+            this.num = num;
+        }
     }
     
     private String u_id;//账户id
@@ -16,12 +25,15 @@ public class User {
     private String address;//送货地址
     private String school;//骑手所属学校
     
+    public User() {
+    }
+    
     public User(String id, String u_name, String u_pw) {
         this.u_id = id;
         this.u_name = u_name;
         this.u_pw = u_pw;
     }
-
+    
     public User(String u_id, String u_name, String u_pw, String phone, String address) {
         this.u_id = u_id;
         this.u_name = u_name;
@@ -29,7 +41,7 @@ public class User {
         this.phone = phone;
         this.address = address;
     }
-
+    
     public String getId() {
         return u_id;
     }
