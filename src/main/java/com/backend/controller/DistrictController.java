@@ -38,7 +38,13 @@ public class DistrictController {
 
     @RequestMapping(value = "/select",method = RequestMethod.GET)
     @ResponseBody
-    public List<District> findDistrict() {
+    public Response<List<District>> findDistrict() {
         return service.getDistricts();
+    }
+
+    @RequestMapping(value = "/getName/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Response<String> findName(@PathVariable int id) {
+        return service.getName(id);
     }
 }

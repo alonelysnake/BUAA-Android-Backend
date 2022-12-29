@@ -2,6 +2,7 @@ package com.backend.service;
 
 import com.backend.entity.Dish;
 import com.backend.mapper.DishMapper;
+import com.backend.mapper.ProviderMapper;
 import com.backend.utils.PageBean;
 import com.backend.utils.Response;
 import com.github.pagehelper.PageHelper;
@@ -15,6 +16,8 @@ import java.util.List;
 public class DishService {
     @Autowired
     private DishMapper dishMapper;
+    @Autowired
+    private ProviderMapper providerMapper;
     
     // 添加菜品
     public Response<Dish> insertDish(Dish dish) {
@@ -221,6 +224,18 @@ public class DishService {
         int success = dishMapper.cancelDislike(id);
         Response<Dish> res = new Response<>();
         res.setInfo(success, "取消点踩成功", "取消点踩失败");
+        return res;
+    }
+
+    public Response<List<Dish>> findDishByDistrict(int d_id) {
+        List<Integer> pids = providerMapper.getProviderByDid(d_id);
+        Response<List<Dish>> res = new Response<>();
+        res.setState(true);
+        List<Dish> dishes = new ArrayList<>();
+        for (int pid: pids) {
+            dishes.addAll(dishMapper.findByPid(pid));
+        }
+        res.setData(dishes);
         return res;
     }
 }

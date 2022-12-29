@@ -17,10 +17,15 @@ import java.util.List;
 public interface ProviderMapper {
     //新增用户
     @Insert("insert into provider(p_name, p_pw, scores, scorers, d_id)" +
-            "values(#{name}, #{pwd}, 0, 0, #{d_id})")
+            "values(#{name}, #{p_pw}, 0, 0, #{d_id})")
 //    @Options(useGeneratedKeys = true, keyProperty = "p_id", keyColumn = "p_id")
     int insert(Provider provider);
-    
+
+    @Insert("insert into provider " +
+            "values(#{p_id}, #{p_name}, #{p_pw}, #{scores}, #{scorers}, #{photo}, #{phone}, #{d_id})")
+//    @Options(useGeneratedKeys = true, keyProperty = "p_id", keyColumn = "p_id")
+    void insertTest(Provider provider);
+
     //注销用户
     @Delete("delete from provider where p_id = #{id}")
     int removeById(@Param("id") String id);
@@ -63,7 +68,13 @@ public interface ProviderMapper {
     //统计用户（根据用户name+密码）
     @Select("select count(*) from provider where p_name = #{name} and p_pw = #{pwd}")
     int countByNameAndPwd(@Param("name")String name, @Param("pwd")String password);
-    
+
+    @Select("select p_id from provider where d_id = #{d_id}")
+    List<Integer> getProviderByDid(@Param("d_id") int d_id);
+
     @Update("update provider set p_name=#{name} and p_pw=#{pw} and phone={phone} where p_id=#{id}")
     int updateInfo(@Param("id") String id, @Param("name") String name, @Param("phone") String phone, @Param("pw") String password);
+
+    @Select("select * from provider")
+    List<Provider> getProviders();
 }

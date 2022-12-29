@@ -21,7 +21,38 @@ public class Provider {
         this.p_pw = p_pw;
         this.d_id = d_id;
     }
-    
+
+    public Provider(String p_id, String p_name, String p_pw, int scores, int scorers, int d_id, String photo, String phone) {
+        this.p_id = p_id;
+        this.p_name = p_name;
+        this.p_pw = p_pw;
+        this.scores = scores;
+        this.scorers = scorers;
+        this.d_id = d_id;
+        this.photo = photo;
+        this.phone = phone;
+    }
+
+    public String getP_id() {
+        return p_id;
+    }
+
+    public String getP_name() {
+        return p_name;
+    }
+
+    public String getP_pw() {
+        return p_pw;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
     public int getScores() {
         return scores;
     }

@@ -8,7 +8,7 @@ create table message(
     r_id int not null ,
     m_time datetime not null ,
     m_content varchar(3000) not null ,
-    primary key (m_id),
-    foreign key (s_id) references user(u_id),
-    foreign key (r_id) references user(u_id)
+    primary key (m_id)
+#     foreign key (s_id) references user(u_id),
+#     foreign key (r_id) references user(u_id)
 )default charset=utf8;

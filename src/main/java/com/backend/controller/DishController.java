@@ -3,6 +3,7 @@ package com.backend.controller;
 import com.backend.entity.Dish;
 import com.backend.entity.Indent;
 import com.backend.service.DishService;
+import com.backend.service.ProviderService;
 import com.backend.utils.ChangeChinesePinyin;
 import com.backend.utils.PageBean;
 import com.backend.utils.Response;
@@ -39,6 +40,12 @@ public class DishController {
     @ResponseBody
     public Response<Dish> deleteDish(@PathVariable int id) {
         return dishService.deleteDish(id);
+    }
+
+    @RequestMapping(value = "/getDishByDistrict/{d_id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Response<List<Dish>> findDishByDistrict(@PathVariable int d_id){
+        return dishService.findDishByDistrict(d_id);
     }
 
     /**

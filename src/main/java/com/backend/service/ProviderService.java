@@ -231,4 +231,18 @@ public class ProviderService {
         res.setState(true);
         return res;
     }
+
+    public Response<List<Integer>> getProviderByDid(int id) {
+        Response<List<Integer>> res = new Response<>();
+        res.setState(true);
+        res.setData(providerMapper.getProviderByDid(id));
+        return res;
+    }
+
+    public Response<List<Provider>> getProviders() {
+        Response<List<Provider>> res = new Response<>();
+        res.setState(true);
+        res.setData(providerMapper.getProviders());
+        return res;
+    }
 }

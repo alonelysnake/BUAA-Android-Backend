@@ -16,6 +16,9 @@ public class Dish {
     private boolean isOver;
     private String pinyin;
 
+    public Dish() {
+    }
+
     public Dish(int d_id, int p_id, double curPrice, double price, int sale, int d_likes, int d_dislikes, String imgUrl, boolean isHot, boolean isTop, String ingredient, String name, boolean isOver, String pinyin) {
         this.d_id = d_id;
         this.p_id = p_id;

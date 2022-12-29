@@ -35,7 +35,18 @@ public class DistrictService {
         return res;
     }
 
-    public List<District> getDistricts() {
-        return districtMapper.listAll();
+    public Response<List<District>> getDistricts() {
+        Response<List<District>> res = new Response<>();
+        res.setData(districtMapper.listAll());
+        res.setState(true);
+        return res;
+    }
+
+    public Response<String> getName(int id) {
+        Response<String> res = new Response<>();
+        res.setData(districtMapper.getName(id));
+        System.out.println(res.getData());
+        res.setState(true);
+        return res;
     }
 }

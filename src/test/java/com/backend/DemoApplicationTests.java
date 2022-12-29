@@ -1,13 +1,7 @@
 package com.backend;
 
-import com.backend.entity.Activity;
-import com.backend.entity.Dish;
-import com.backend.entity.DishIndent;
-import com.backend.entity.Indent;
-import com.backend.mapper.ActivityMapper;
-import com.backend.mapper.DishIndentMapper;
-import com.backend.mapper.DishMapper;
-import com.backend.mapper.IndentMapper;
+import com.backend.entity.*;
+import com.backend.mapper.*;
 import com.backend.utils.RunPython;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 import org.junit.jupiter.api.Test;
@@ -32,6 +26,8 @@ class DemoApplicationTests {
     private DishMapper dishMapper;
     @Autowired
     private DishIndentMapper dishIndentMapper;
+    @Autowired
+    private ProviderMapper providerMapper;
 
     @Test
     void testPinyin() throws BadHanyuPinyinOutputFormatCombination {
@@ -66,19 +62,26 @@ class DemoApplicationTests {
     @Test
     void addDishData() throws BadHanyuPinyinOutputFormatCombination {
         ArrayList<Dish> dishes = new ArrayList<>();
-        Map<String, String> fydmcPinYinMap = changeChinesePinyin("鱼香肉丝");
-        dishes.add(new Dish(1,10,12,10,1,1,"1",true,true,"鱼、萝卜","鱼香肉丝",false,fydmcPinYinMap.get("fullPinyin")));
-        fydmcPinYinMap = changeChinesePinyin("糖醋排骨");
-        dishes.add(new Dish(1,10,12,12,1,1,"2",true,true,"排骨、白糖、陈醋","糖醋排骨",false,fydmcPinYinMap.get("fullPinyin")));
-        fydmcPinYinMap = changeChinesePinyin("宫保鸡丁");
-        dishes.add(new Dish(1,7,10,19,4,1,"3",false,false,"鸡肉、辣椒","宫保鸡丁",false,fydmcPinYinMap.get("fullPinyin")));
-        fydmcPinYinMap = changeChinesePinyin("清炒土豆丝");
-        dishes.add(new Dish(1,3,4,14,4,1,"4",false,false,"土豆","清炒土豆丝",false,fydmcPinYinMap.get("fullPinyin")));
-        fydmcPinYinMap = changeChinesePinyin("黄焖鸡");
-        dishes.add(new Dish(1,3,4,14,4,1,"5",false,false,"鸡肉","黄焖鸡",true,fydmcPinYinMap.get("fullPinyin")));
+        Map<String, String> fydmcPinYinMap = changeChinesePinyin("麻婆豆腐");
+        dishes.add(new Dish(1,4,5,10,1,1,"1",true,true,"豆腐、辣椒","麻婆豆腐",false,fydmcPinYinMap.get("fullPinyin")));
+        fydmcPinYinMap = changeChinesePinyin("糖醋里脊");
+        dishes.add(new Dish(1,10,12,12,1,1,"2",true,true,"里脊、白糖、陈醋","糖醋里脊",false,fydmcPinYinMap.get("fullPinyin")));
+        fydmcPinYinMap = changeChinesePinyin("风味茄子");
+        dishes.add(new Dish(1,5,6,19,4,1,"3",false,false,"茄子","风味茄子",false,fydmcPinYinMap.get("fullPinyin")));
+        fydmcPinYinMap = changeChinesePinyin("梅菜扣肉");
+        dishes.add(new Dish(1,10,12,14,4,1,"4",false,false,"咸菜、猪肉","梅菜扣肉",false,fydmcPinYinMap.get("fullPinyin")));
+        fydmcPinYinMap = changeChinesePinyin("西红柿炒蛋");
+        dishes.add(new Dish(1,4,4,14,4,1,"5",false,false,"西红柿、鸡蛋","西红柿炒蛋",true,fydmcPinYinMap.get("fullPinyin")));
         for (Dish dish:dishes) {
             dishMapper.insert(dish);
         }
+    }
+
+    @Test
+    void addProviderData() {
+        providerMapper.insertTest(new Provider("1","合一基本伙","123456",500,205,1,"1","18212682115"));
+        providerMapper.insertTest(new Provider("2","合一精品伙","123456",550,205,1,"2","18212682115"));
+        providerMapper.insertTest(new Provider("3","合一卤肉饭","123456",470,205,1,"3","18212682115"));
     }
 
     @Test

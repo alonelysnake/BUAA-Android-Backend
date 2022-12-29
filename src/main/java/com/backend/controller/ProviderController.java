@@ -101,4 +101,10 @@ public class ProviderController {
                                         @PathVariable String password) {
         return providerService.changeInfo(id, name, phone, address, password);
     }
+
+    @RequestMapping(path = "/getProviders")
+    public Response<List<Provider>> getProviders() {
+        return providerService.getProviders();
+    }
+
 }

@@ -26,4 +26,7 @@ public interface DistrictMapper {
     // 查询
     @Select("select * from district")
     List<District> listAll();
+
+    @Select("select d_name from district where d_id=#{d_id}")
+    String getName(@Param("d_id") int id);
 }
