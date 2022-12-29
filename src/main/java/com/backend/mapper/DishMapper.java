@@ -84,5 +84,8 @@ public interface DishMapper {
     
     @Select("select d_id, name from dish where p_id = #{p_id}")
     List<HashMap<String,Object>>listDishById(@Param("p_id")String pid);
+
+    @Select("select * from dish where d_id = #{d_id}")
+    Dish findDishById(@Param("d_id") int did);
 }
 

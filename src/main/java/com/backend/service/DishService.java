@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +21,35 @@ public class DishService {
         Response<Dish> res = new Response<>();
         int success = dishMapper.insert(dish);
         res.setInfo(success,"添加菜品成功","添加菜品失败");
+        return res;
+    }
+
+    public Response<Double> getTotalCost(ArrayList<Integer> ids) {
+        Response<Double> res = new Response<>();
+        List<Dish> dishes = findDishByIds(ids).getData();
+        double cost = 0;
+        for (Dish dish:dishes) {
+            cost += dish.getCurPrice();
+        }
+        res.setState(true);
+        res.setMsg("成功");
+        res.setData(cost);
+        return res;
+    }
+
+    public Response<List<Dish>> findDishByIds(ArrayList<Integer> ids) {
+        Response<List<Dish>> res = new Response<>();
+        List<Dish> dishes = new ArrayList<>();
+        for (int id:ids) {
+            try {
+                Dish dish = dishMapper.findDishById(id);
+                dishes.add(dish);
+            } catch (Exception ignored) {
+            }
+        }
+        res.setState(true);
+        res.setMsg("成功");
+        res.setData(dishes);
         return res;
     }
 

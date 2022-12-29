@@ -10,6 +10,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.backend.utils.ChangeChinesePinyin.changeChinesePinyin;
@@ -125,6 +126,18 @@ public class DishController {
     @ResponseBody
     public Response<Dish> cancelDislike(@PathVariable int id) {
         return dishService.cancelDislike(id);
+    }
+
+    @RequestMapping("/findDishByIds")
+    @ResponseBody
+    public Response<List<Dish>> findDishByIds(@RequestBody ArrayList<Integer> ids) {
+        return dishService.findDishByIds(ids);
+    }
+
+    @RequestMapping("/getTotalCost")
+    @ResponseBody
+    public Response<Double> getTotalCost(@RequestBody ArrayList<Integer> ids) {
+        return dishService.getTotalCost(ids);
     }
 }
 
